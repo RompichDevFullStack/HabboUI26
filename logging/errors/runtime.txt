@@ -1,0 +1,258 @@
+23:32:19.521 [main] ERROR com.eu.habbo.core.ConfigurationManager - Failed to load config file.
+java.io.FileNotFoundException: config.ini (Le fichier spécifié est introuvable)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(Unknown Source)
+	at java.base/java.io.FileInputStream.<init>(Unknown Source)
+	at com.eu.habbo.core.ConfigurationManager.reload(ConfigurationManager.java:50)
+	at com.eu.habbo.core.ConfigurationManager.<init>(ConfigurationManager.java:29)
+	at com.eu.habbo.Emulator.main(Emulator.java:127)
+23:32:19.524 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:32:19.524 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:32:19.525 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.e
+23:32:19.526 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.n
+23:32:19.527 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.d
+23:32:19.547 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.maxsize
+23:32:19.547 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.minsize
+23:32:19.548 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:32:19.548 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:32:19.549 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:32:19.549 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.params
+23:32:19.550 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:32:19.551 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:32:19.552 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:32:19.553 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.username
+23:32:19.553 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.password
+23:32:20.869 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:836)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:246)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:121)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:477)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:560)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at com.eu.habbo.database.DatabasePool.getStoragePooling(DatabasePool.java:41)
+	at com.eu.habbo.database.Database.<init>(Database.java:32)
+	at com.eu.habbo.Emulator.main(Emulator.java:133)
+23:33:33.007 [main] ERROR com.eu.habbo.core.ConfigurationManager - Failed to load config file.
+java.io.FileNotFoundException: config.ini (Le fichier spécifié est introuvable)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(Unknown Source)
+	at java.base/java.io.FileInputStream.<init>(Unknown Source)
+	at com.eu.habbo.core.ConfigurationManager.reload(ConfigurationManager.java:50)
+	at com.eu.habbo.core.ConfigurationManager.<init>(ConfigurationManager.java:29)
+	at com.eu.habbo.Emulator.main(Emulator.java:127)
+23:33:33.010 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:33:33.011 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:33:33.011 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.e
+23:33:33.012 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.n
+23:33:33.013 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.d
+23:33:33.016 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.maxsize
+23:33:33.017 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.minsize
+23:33:33.018 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:33:33.018 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:33:33.019 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:33:33.019 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.params
+23:33:33.020 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:33:33.020 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:33:33.021 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:33:33.021 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.username
+23:33:33.023 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.password
+23:33:34.245 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:836)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:246)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:121)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:477)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:560)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at com.eu.habbo.database.DatabasePool.getStoragePooling(DatabasePool.java:41)
+	at com.eu.habbo.database.Database.<init>(Database.java:32)
+	at com.eu.habbo.Emulator.main(Emulator.java:133)
+23:33:44.681 [main] ERROR com.eu.habbo.core.ConfigurationManager - Failed to load config file.
+java.io.FileNotFoundException: config.ini (Le fichier spécifié est introuvable)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(Unknown Source)
+	at java.base/java.io.FileInputStream.<init>(Unknown Source)
+	at com.eu.habbo.core.ConfigurationManager.reload(ConfigurationManager.java:50)
+	at com.eu.habbo.core.ConfigurationManager.<init>(ConfigurationManager.java:29)
+	at com.eu.habbo.Emulator.main(Emulator.java:127)
+23:33:44.684 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:33:44.685 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:33:44.685 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.e
+23:33:44.685 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.n
+23:33:44.686 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.d
+23:33:44.689 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.maxsize
+23:33:44.690 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.minsize
+23:33:44.690 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:33:44.691 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:33:44.691 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:33:44.691 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.params
+23:33:44.692 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:33:44.693 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:33:44.693 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:33:44.694 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.username
+23:33:44.695 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.password
+23:33:45.863 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:836)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:246)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:121)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:477)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:560)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at com.eu.habbo.database.DatabasePool.getStoragePooling(DatabasePool.java:41)
+	at com.eu.habbo.database.Database.<init>(Database.java:32)
+	at com.eu.habbo.Emulator.main(Emulator.java:133)
+23:35:19.751 [main] ERROR com.eu.habbo.core.ConfigurationManager - Failed to load config file.
+java.io.FileNotFoundException: config.ini (Le fichier spécifié est introuvable)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(Unknown Source)
+	at java.base/java.io.FileInputStream.<init>(Unknown Source)
+	at com.eu.habbo.core.ConfigurationManager.reload(ConfigurationManager.java:50)
+	at com.eu.habbo.core.ConfigurationManager.<init>(ConfigurationManager.java:29)
+	at com.eu.habbo.Emulator.main(Emulator.java:127)
+23:35:19.754 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:35:19.755 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:35:19.756 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.e
+23:35:19.756 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.n
+23:35:19.757 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.d
+23:35:19.759 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.maxsize
+23:35:19.760 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.minsize
+23:35:19.760 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:35:19.761 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:35:19.761 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:35:19.762 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.params
+23:35:19.762 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:35:19.763 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:35:19.763 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:35:19.764 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.username
+23:35:19.766 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.password
+23:35:20.953 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:836)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:246)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:121)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:477)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:560)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at com.eu.habbo.database.DatabasePool.getStoragePooling(DatabasePool.java:41)
+	at com.eu.habbo.database.Database.<init>(Database.java:32)
+	at com.eu.habbo.Emulator.main(Emulator.java:133)
+23:35:37.472 [main] ERROR com.eu.habbo.core.ConfigurationManager - Failed to load config file.
+java.io.FileNotFoundException: config.ini (Le fichier spécifié est introuvable)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(Unknown Source)
+	at java.base/java.io.FileInputStream.<init>(Unknown Source)
+	at com.eu.habbo.core.ConfigurationManager.reload(ConfigurationManager.java:50)
+	at com.eu.habbo.core.ConfigurationManager.<init>(ConfigurationManager.java:29)
+	at com.eu.habbo.Emulator.main(Emulator.java:127)
+23:35:37.475 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:35:37.475 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:35:37.476 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.e
+23:35:37.476 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.n
+23:35:37.477 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.d
+23:35:37.481 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.maxsize
+23:35:37.481 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.minsize
+23:35:37.482 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:35:37.482 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:35:37.483 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:35:37.484 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.params
+23:35:37.484 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:35:37.485 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:35:37.485 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:35:37.486 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.username
+23:35:37.486 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.password
+23:35:38.679 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:836)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:246)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:121)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:477)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:560)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at com.eu.habbo.database.DatabasePool.getStoragePooling(DatabasePool.java:41)
+	at com.eu.habbo.database.Database.<init>(Database.java:32)
+	at com.eu.habbo.Emulator.main(Emulator.java:133)
+23:35:51.367 [main] ERROR com.eu.habbo.core.ConfigurationManager - Failed to load config file.
+java.io.FileNotFoundException: config.ini (Le fichier spécifié est introuvable)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(Unknown Source)
+	at java.base/java.io.FileInputStream.<init>(Unknown Source)
+	at com.eu.habbo.core.ConfigurationManager.reload(ConfigurationManager.java:50)
+	at com.eu.habbo.core.ConfigurationManager.<init>(ConfigurationManager.java:29)
+	at com.eu.habbo.Emulator.main(Emulator.java:127)
+23:35:51.370 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:35:51.370 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.enabled
+23:35:51.370 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.e
+23:35:51.371 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.n
+23:35:51.371 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found enc.d
+23:35:51.374 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.maxsize
+23:35:51.375 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.pool.minsize
+23:35:51.375 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:35:51.376 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:35:51.376 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:35:51.377 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.params
+23:35:51.377 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.hostname
+23:35:51.377 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.port
+23:35:51.378 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.database
+23:35:51.378 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.username
+23:35:51.379 [main] ERROR com.eu.habbo.core.ConfigurationManager - Config key not found db.password
+23:35:52.554 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:836)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:246)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:121)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:477)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:560)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at com.eu.habbo.database.DatabasePool.getStoragePooling(DatabasePool.java:41)
+	at com.eu.habbo.database.Database.<init>(Database.java:32)
+	at com.eu.habbo.Emulator.main(Emulator.java:133)
