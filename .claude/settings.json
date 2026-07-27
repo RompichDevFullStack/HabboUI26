@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-Command mysql -ErrorAction SilentlyContinue; Get-Command mysqld -ErrorAction SilentlyContinue; Test-Path \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysqld.exe\"; Test-Path \"C:\\\\laragon\\\\bin\\\\mysql\"; Get-Process | Where-Object {$_.ProcessName -match \"mysql|mariadb|httpd|xampp\"} | Select-Object ProcessName, Id)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -h localhost -u root -e \"SHOW DATABASES;\" 2>&1)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -h localhost -u root -e \"USE habbo; SHOW TABLES;\" 2>&1)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -h localhost -u root -e \"SELECT User, Host FROM mysql.user WHERE User='root';\" 2>&1)"
+    ]
+  }
+}
