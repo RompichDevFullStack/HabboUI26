@@ -21,6 +21,7 @@ import { InventoryView } from '../inventory/InventoryView';
 import { ModToolsView } from '../mod-tools/ModToolsView';
 import { NavigatorView } from '../navigator/NavigatorView';
 import { NitropediaView } from '../nitropedia/NitropediaView';
+import { PurseView } from '../purse/PurseView';
 import { RightSideView } from '../right-side/RightSideView';
 import { RoomView } from '../room/RoomView';
 import { ToolbarView } from '../toolbar/ToolbarView';
@@ -95,6 +96,7 @@ export const MainView: FC<{}> = props =>
             <InventoryView />
             <CatalogView />
             <FriendsView />
+            <PurseView />
             <RightSideView />
             <UserSettingsView />
             <UserProfileView />
