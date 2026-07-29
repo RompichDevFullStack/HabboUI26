@@ -44,7 +44,10 @@ export const ChatInputStyleSelectorView: FC<ChatInputStyleSelectorViewProps> = p
 
     return (
         <>
-            <Base pointer className="icon chatstyles-icon" onClick={ toggleSelector } />
+            <Flex alignItems="center" pointer className="chat-style-toggle" onClick={ toggleSelector }>
+                <Base className="chat-style-arrow" />
+                <Base className="icon chatstyles-icon" />
+            </Flex>
             <Overlay show={ selectorVisible } target={ target } placement="top">
                 <Popover className="nitro-chat-style-selector-container image-rendering-pixelated">
                     <NitroCardContentView overflow="hidden" className="bg-transparent">

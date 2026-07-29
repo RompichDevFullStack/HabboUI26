@@ -6,9 +6,6 @@
     height: $toolbar-height;
     z-index: $toolbar-zindex;
     pointer-events: all;
-    background: rgba($dark, 0.95);
-    box-shadow: inset 0px 5px lighten(rgba($dark, 0.6), 2.5),
-        inset 0 -4px darken(rgba($dark, 0.6), 4);
 
     .navigation-item {
         position: relative;
@@ -38,7 +35,12 @@
         }
     }
 
-    #toolbar-chat-input-container {
+    .nitro-toolbar-chat-input-center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 30%;
 
         @include media-breakpoint-down(sm) {
             width: 0px;
