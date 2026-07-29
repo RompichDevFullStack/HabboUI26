@@ -12,6 +12,13 @@ export const PurseView: FC<{}> = props =>
     const displayedCurrencies = useMemo(() => GetConfiguration<number[]>('system.currency.types', []), []);
     const currencyDisplayNumberShort = useMemo(() => GetConfiguration<boolean>('currency.display.number.short', false), []);
 
+    const getCurrencyElement = (type: number) =>
+    {
+        if(!purse || !purse.activityPoints || !purse.activityPoints.has(type)) return null;
+
+        return <CurrencyView key={ type } type={ type } amount={ purse.activityPoints.get(type) } short={ currencyDisplayNumberShort } />;
+    }
+
     const getCurrencyElements = (offset: number, limit: number = -1, seasonal: boolean = false) =>
     {
         if(!purse || !purse.activityPoints || !purse.activityPoints.size) return null;
@@ -51,8 +58,9 @@ export const PurseView: FC<{}> = props =>
             <Flex className="nitro-purse rounded-bottom p-1">
                 <Grid fullWidth gap={ 0 }>
                     <Column column={ false } alignItems="center" justifyContent="center" size={ 8 } gap={ 3 } className="nitro-purse-currencies">
+                        { getCurrencyElement(5) }
                         <CurrencyView type={ -1 } amount={ purse.credits } short={ currencyDisplayNumberShort } />
-                        { getCurrencyElements(0, 2) }
+                        { getCurrencyElement(0) }
                     </Column>
                     <Column column={ false } alignItems="center" justifyContent="center" size={ 2 } offset={ 10 } gap={ 3 } className="nitro-purse-actions">
                         <Flex center pointer fullHeight className="nitro-purse-button p-1 rounded" onClick={ event => CreateLinkEvent('help/show') }>
