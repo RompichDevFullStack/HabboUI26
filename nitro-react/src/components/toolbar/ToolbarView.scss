@@ -1,11 +1,15 @@
 .nitro-toolbar {
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     left: 0;
     width: 100%;
     height: $toolbar-height;
     z-index: $toolbar-zindex;
-    pointer-events: all;
+    pointer-events: none;
+
+    > * {
+        pointer-events: all;
+    }
 
     .navigation-item {
         position: relative;
@@ -40,7 +44,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: 30%;
+        width: 40%;
 
         @include media-breakpoint-down(sm) {
             width: 0px;
@@ -49,22 +53,113 @@
     }
 }
 
-.nitro-toolbar-me {
+.nitro-toolbar-quick-actions {
     position: absolute;
-    bottom: 60px;
-    left: 15px;
+    bottom: 20px;
+    left: 280px;
+    flex-direction: row;
+    gap: 10px;
     z-index: $toolbar-memenu-zindex;
-    background: rgba(20, 20, 20, .95);
-    border: 1px solid #101010;
-    box-shadow: inset 2px 2px rgba(255, 255, 255, .1), inset -2px -2px rgba(255, 255, 255, .1);
-    border-radius: $border-radius;
 
     .navigation-item {
-        transition: filter .2s ease-out;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(20, 20, 20, .85);
+        border: 2px solid #101010;
+        box-shadow: inset 2px 2px rgba(255, 255, 255, .1), inset -2px -2px rgba(255, 255, 255, .1);
+        transition: filter .2s ease-out, transform .15s ease-out;
         filter: grayscale(1);
 
         &:hover {
             filter: grayscale(0) drop-shadow(2px 2px 0 rgba($black, 0.8));
+            transform: scale(1.05);
+        }
+    }
+}
+
+.nitro-toolbar-me {
+    position: absolute;
+    bottom: 10px;
+    left: 45px;
+    width: 170px;
+    height: 130px;
+    z-index: $toolbar-memenu-zindex;
+
+    .navigation-item.me-menu-button {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(20, 20, 20, .85);
+        border: 2px solid #101010;
+        box-shadow: inset 2px 2px rgba(255, 255, 255, .1), inset -2px -2px rgba(255, 255, 255, .1);
+        transition: filter .2s ease-out, transform .15s ease-out;
+        filter: grayscale(1);
+
+        &:hover {
+            filter: grayscale(0) drop-shadow(2px 2px 0 rgba($black, 0.8));
+            transform: scale(1.05);
+        }
+
+        // Always shown in its active (non-grayscale) state, regardless of hover.
+        &.active {
+            filter: none;
+
+            &:hover {
+                filter: drop-shadow(2px 2px 0 rgba($black, 0.8));
+            }
+        }
+
+        &.me-slot-top-left {
+            top: 10px;
+            left: 0;
+        }
+
+        &.me-slot-top-center {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+
+            &:hover {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
+        &.me-slot-top-right {
+            top: 10px;
+            right: 0px;
+        }
+
+        &.me-slot-bottom-left {
+            top: 70px;
+            left: -10px;
+        }
+
+        &.me-slot-bottom-center {
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 64px;
+            height: 64px;
+            overflow: hidden;
+            background: rgba(76, 175, 80, .9);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, .35), inset 2px 2px rgba(255, 255, 255, .15), inset -2px -2px rgba(255, 255, 255, .15);
+
+            .avatar-image {
+                margin-left: -6px;
+                margin-top: 34px;
+            }
+
+            &:hover {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
+        &.me-slot-bottom-right {
+            top: 70px;
+            right: -10px;
         }
     }
 }
