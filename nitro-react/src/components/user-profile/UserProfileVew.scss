@@ -59,8 +59,27 @@
     .user-container-info {
 
         .avatar-container {
-            width: 75px;
-            height: 120px;
+            width: 150px;
+            height: 240px;
+            overflow: visible;
+        }
+    }
+
+    .user-info-columns {
+        display: grid !important;
+        grid-template-columns: 44px 1fr;
+        row-gap: 6px;
+        padding-top: 24px;
+
+        .user-info-grid-icon {
+            grid-column: 1;
+            grid-row: 4;
+            align-self: center;
+        }
+
+        .user-info-grid-text {
+            grid-column: 2;
+            min-width: 0;
         }
     }
 
@@ -79,6 +98,35 @@
         }
     }
 
+    .user-add-friend-icon {
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #43b93e;
+        box-shadow: inset 1px 1px rgba($white, 0.25), inset -1px -1px rgba($black, 0.25);
+        color: $white;
+        transition: filter .15s ease-out;
+
+        .fa-icon {
+            font-size: 22px;
+        }
+
+        &:hover {
+            filter: brightness(1.15);
+        }
+    }
+
+    .user-stat-label {
+        font-size: 16px;
+        line-height: 1.1;
+    }
+
+    .user-stat-value {
+        font-size: 22px;
+        line-height: 1.1;
+    }
+
     .user-profile-section-header {
         margin-top: 6px;
         padding: 4px 6px;
@@ -88,6 +136,10 @@
             font-size: 11px;
             opacity: 0.6;
         }
+    }
+
+    .user-profile-section-title {
+        font-size: 18px;
     }
 
     .user-profile-badges-grid {
@@ -100,25 +152,6 @@
         .room-thumbnail {
             width: 42px;
             height: 42px;
-        }
-    }
-
-    .user-profile-quick-actions {
-        margin-top: 8px;
-        padding: 6px 0 2px;
-    }
-
-    .user-profile-ghost-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: rgba($white, 0.05);
-        opacity: 0.45;
-        transition: opacity .15s ease-out, background .15s ease-out;
-
-        &:hover {
-            opacity: 1;
-            background: rgba($white, 0.12);
         }
     }
 

@@ -1,37 +1,185 @@
+.draggable-window:has(.nitro-navigator) {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    height: 100vh !important;
+}
+
 .nitro-navigator {
-    width: $navigator-width;
-    height: $navigator-height;
+    width: 640px;
+    height: 100% !important;
+    border-radius: 0;
 
-    .navigator-grid {
+    .nitro-card-header {
+        background: $black !important;
+        box-shadow: none !important;
+    }
 
-        .navigator-item {
+    .text-black {
+        color: $white !important;
+    }
 
-            .badge {
-                width: 35px;
-                min-width: 35px;
-            }
+    .navigator-layout {
+        height: 100%;
+    }
+
+    .navigator-sidebar {
+        flex-shrink: 0;
+        width: 220px;
+        height: 100%;
+        padding: 0 10px;
+        background: $black;
+        border-right: 1px solid rgba($white, 0.08);
+    }
+
+    .navigator-search-input {
+        gap: 8px;
+        padding: 12px 10px;
+        border-radius: 8px;
+        background: rgba($white, 0.08);
+        color: rgba($white, 0.6);
+
+        .fa-icon {
+            font-size: 16px;
         }
 
-        &:not(.two-columns) {
+        input {
+            flex: 1 1 auto;
+            min-width: 0;
+            background: none;
+            border: none;
+            outline: none;
+            color: $white;
+            font-size: 15px;
 
-            .navigator-item {
-    
-                &:nth-child(odd) {
-                    background-color: $grid-active-bg-color;
-                }
+            &::placeholder {
+                color: rgba($white, 0.4);
             }
         }
-    
-        &.two-columns {
-    
-            .navigator-item {
-        
-                &:nth-child(4n-2),
-                &:nth-child(4n-3) {
-                    background: $grid-active-bg-color;
-                }
-            }
+    }
+
+    .navigator-sidebar-buttons {
+        margin-top: 4px;
+        gap: 10px !important;
+    }
+
+    .navigator-sidebar-button {
+        padding: 14px 10px;
+        border: 1px solid rgba($white, 0.3);
+        border-radius: 6px;
+        color: $white;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        transition: background .15s ease-out, border-color .15s ease-out;
+
+        &:hover {
+            background: rgba($white, 0.08);
         }
+
+        &.active {
+            background: rgba($success, 0.25);
+            border-color: $success;
+        }
+    }
+
+    .navigator-create-button {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 24px;
+        border-radius: 50%;
+        background: $success;
+        color: $white;
+        box-shadow: inset 1px 1px rgba($white, 0.25), inset -1px -1px rgba($black, 0.25);
+        transition: filter .15s ease-out;
+
+        .fa-icon {
+            font-size: 16px;
+        }
+
+        &:hover {
+            filter: brightness(1.15);
+        }
+    }
+
+    .navigator-main {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 100%;
+        background: #1c1f26;
+    }
+
+    .navigator-results {
+        padding: 10px;
+    }
+
+    .navigator-result-group-header {
+        padding: 2px 4px 6px;
+        color: $white;
+
+        .fa-icon {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+    }
+
+    .navigator-result-rooms {
+        gap: 8px;
+    }
+
+    .navigator-item {
+        padding: 6px;
+        border-radius: 8px;
+        background: rgba($white, 0.04);
+        transition: background .15s ease-out;
+
+        &:hover {
+            background: rgba($white, 0.08);
+        }
+
+        .badge {
+            font-size: 10px;
+        }
+    }
+
+    .navigator-item-thumbnail-container {
+        flex-shrink: 0;
+
+        .room-thumbnail {
+            width: 52px;
+            height: 52px;
+            border-radius: 6px;
+        }
+    }
+
+    .navigator-item-info {
+        min-width: 0;
+    }
+
+    .navigator-item-name {
+        font-size: 13px;
+    }
+
+    .navigator-item-owner {
+        font-size: 11px;
+        color: #7ab8e0;
+    }
+
+    .navigator-item-info-button {
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 2px dashed rgba($white, 0.5);
+    }
+
+    .navigator-item-usercount {
+        width: 100%;
+        padding: 4px 0;
+        border-radius: 4px;
+        color: $white;
+        font-size: 12px;
+        font-weight: bold;
     }
 }
 
@@ -40,16 +188,141 @@
     width: 250px;
 }
 
+.draggable-window:has(.nitro-room-info) {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    height: 100vh !important;
+}
+
 .nitro-room-info {
     width: $room-info-width;
+    height: 100% !important;
+    border-radius: 0;
+
+    .nitro-card-header {
+        background: $black !important;
+        box-shadow: none !important;
+    }
+
+    .content-area {
+        background-color: $black !important;
+    }
+
+    .text-black {
+        color: $white !important;
+    }
+
+    .content-area {
+        font-size: 15px;
+    }
+
+    .btn {
+        padding: 12px 10px;
+        font-size: 15px;
+        background: rgba($white, 0.06);
+        border: 1px solid rgba($white, 0.3);
+        color: $white;
+        transition: background .15s ease-out, border-color .15s ease-out;
+
+        &:hover {
+            background: rgba($white, 0.14);
+            border-color: rgba($white, 0.5);
+            color: $white;
+        }
+
+        &.btn-danger {
+            background: rgba($danger, 0.25);
+            border-color: $danger;
+
+            &:hover {
+                background: rgba($danger, 0.4);
+            }
+        }
+    }
+
+    .nitro-room-info-buttons {
+        margin-top: 10px;
+    }
 }
 
 .nitro-room-link {
     width: 400px;
 }
 
+.draggable-window:has(.nitro-room-settings) {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    height: 100vh !important;
+}
+
 .nitro-room-settings {
     width: 400px;
+    height: 100% !important;
+    border-radius: 0;
+
+    .nitro-card-header {
+        background: $black !important;
+        box-shadow: none !important;
+    }
+
+    .nitro-card-tabs {
+        background-color: $black !important;
+
+        .nav-item {
+            background-color: rgba($white, 0.06);
+            color: $white;
+            border-color: rgba($white, 0.2);
+
+            &:before {
+                background: rgba($white, 0.3);
+            }
+
+            &.active {
+                background-color: rgba($white, 0.16);
+                color: $black;
+                border-color: rgba($white, 0.2) rgba($white, 0.2) rgba($white, 0.16) !important;
+
+                &:before {
+                    background: $white;
+                }
+            }
+        }
+    }
+
+    .content-area {
+        background-color: $black !important;
+        font-size: 15px;
+    }
+
+    .text-black {
+        color: $white !important;
+    }
+
+    .btn {
+        padding: 12px 10px;
+        font-size: 15px;
+        background: rgba($white, 0.06);
+        border: 1px solid rgba($white, 0.3);
+        color: $white;
+        transition: background .15s ease-out, border-color .15s ease-out;
+
+        &:hover {
+            background: rgba($white, 0.14);
+            border-color: rgba($white, 0.5);
+            color: $white;
+        }
+
+        &.btn-danger {
+            background: rgba($danger, 0.25);
+            border-color: $danger;
+
+            &:hover {
+                background: rgba($danger, 0.4);
+            }
+        }
+    }
 
     .list-container {
         height: 100px;

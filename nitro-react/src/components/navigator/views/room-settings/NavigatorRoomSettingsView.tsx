@@ -1,13 +1,28 @@
 import { RoomBannedUsersComposer, RoomDataParser, RoomSettingsDataEvent, SaveRoomSettingsComposer } from '@nitrots/nitro-renderer';
-import { FC, useState } from 'react';
+import { CSSProperties, FC, useState } from 'react';
+import { Transition } from 'react-transition-group';
 import { IRoomData, LocalizeText, SendMessageComposer } from '../../../../api';
-import { NitroCardContentView, NitroCardHeaderView, NitroCardTabsItemView, NitroCardTabsView, NitroCardView } from '../../../../common';
+import { DraggableWindowPosition, NitroCardContentView, NitroCardHeaderView, NitroCardTabsItemView, NitroCardTabsView, NitroCardView } from '../../../../common';
 import { useMessageEvent } from '../../../../hooks';
 import { NavigatorRoomSettingsAccessTabView } from './NavigatorRoomSettingsAccessTabView';
 import { NavigatorRoomSettingsBasicTabView } from './NavigatorRoomSettingsBasicTabView';
 import { NavigatorRoomSettingsModTabView } from './NavigatorRoomSettingsModTabView';
 import { NavigatorRoomSettingsRightsTabView } from './NavigatorRoomSettingsRightsTabView';
 import { NavigatorRoomSettingsVipChatTabView } from './NavigatorRoomSettingsVipChatTabView';
+
+const SLIDE_TIMEOUT = 300;
+
+const SLIDE_DEFAULT_STYLE: CSSProperties = {
+    transition: `transform ${ SLIDE_TIMEOUT }ms ease-out`,
+    transform: 'translateX(-100%)'
+};
+
+const SLIDE_TRANSITION_STYLES: { [ state: string ]: CSSProperties } = {
+    entering: { transform: 'translateX(0)' },
+    entered: { transform: 'translateX(0)' },
+    exiting: { transform: 'translateX(-100%)' },
+    exited: { transform: 'translateX(-100%)' }
+};
 
 const TABS: string[] = [
     'navigator.roomsettings.tab.1',
@@ -20,6 +35,7 @@ const TABS: string[] = [
 export const NavigatorRoomSettingsView: FC<{}> = props =>
 {
     const [ roomData, setRoomData ] = useState<IRoomData>(null);
+    const [ isVisible, setIsVisible ] = useState(false);
     const [ currentTab, setCurrentTab ] = useState(TABS[0]);
 
     useMessageEvent<RoomSettingsDataEvent>(RoomSettingsDataEvent, event =>
@@ -27,6 +43,8 @@ export const NavigatorRoomSettingsView: FC<{}> = props =>
         const parser = event.getParser();
 
         if(!parser) return;
+
+        setIsVisible(true);
 
         const data = parser.data;
 
@@ -65,7 +83,7 @@ export const NavigatorRoomSettingsView: FC<{}> = props =>
 
     const onClose = () =>
     {
-        setRoomData(null);
+        setIsVisible(false);
         setCurrentTab(TABS[0]);
     }
 
@@ -181,26 +199,30 @@ export const NavigatorRoomSettingsView: FC<{}> = props =>
     if(!roomData) return null;
 
     return (
-        <NitroCardView uniqueKey="nitro-room-settings" className="nitro-room-settings">
-            <NitroCardHeaderView headerText={ LocalizeText('navigator.roomsettings') } onCloseClick={ onClose } />
-            <NitroCardTabsView>
-                { TABS.map(tab =>
-                {
-                    return <NitroCardTabsItemView key={ tab } isActive={ (currentTab === tab) } onClick={ event => setCurrentTab(tab) }>{ LocalizeText(tab) }</NitroCardTabsItemView>
-                }) }
-            </NitroCardTabsView>
-            <NitroCardContentView>
-                { (currentTab === TABS[0]) &&
-                    <NavigatorRoomSettingsBasicTabView roomData={ roomData } handleChange={ handleChange } onClose={ onClose } /> }
-                { (currentTab === TABS[1]) &&
-                    <NavigatorRoomSettingsAccessTabView roomData={ roomData } handleChange={ handleChange } /> }
-                { (currentTab === TABS[2]) &&
-                    <NavigatorRoomSettingsRightsTabView roomData={ roomData } handleChange={ handleChange } /> }
-                { (currentTab === TABS[3]) &&
-                    <NavigatorRoomSettingsVipChatTabView roomData={ roomData } handleChange={ handleChange } /> }
-                { (currentTab === TABS[4]) &&
-                    <NavigatorRoomSettingsModTabView roomData={ roomData } handleChange={ handleChange } /> }
-            </NitroCardContentView>
-        </NitroCardView>
+        <Transition in={ isVisible } appear timeout={ SLIDE_TIMEOUT } unmountOnExit>
+            { state => (
+                <NitroCardView uniqueKey="nitro-room-settings" className="nitro-room-settings" style={ { ...SLIDE_DEFAULT_STYLE, ...SLIDE_TRANSITION_STYLES[ state ] } } windowPosition={ DraggableWindowPosition.NOTHING } disableDrag>
+                    <NitroCardHeaderView headerText={ LocalizeText('navigator.roomsettings') } onCloseClick={ onClose } />
+                    <NitroCardTabsView>
+                        { TABS.map(tab =>
+                        {
+                            return <NitroCardTabsItemView key={ tab } isActive={ (currentTab === tab) } onClick={ event => setCurrentTab(tab) }>{ LocalizeText(tab) }</NitroCardTabsItemView>
+                        }) }
+                    </NitroCardTabsView>
+                    <NitroCardContentView classNames={ [ 'theme-dark' ] }>
+                        { (currentTab === TABS[0]) &&
+                            <NavigatorRoomSettingsBasicTabView roomData={ roomData } handleChange={ handleChange } onClose={ onClose } /> }
+                        { (currentTab === TABS[1]) &&
+                            <NavigatorRoomSettingsAccessTabView roomData={ roomData } handleChange={ handleChange } /> }
+                        { (currentTab === TABS[2]) &&
+                            <NavigatorRoomSettingsRightsTabView roomData={ roomData } handleChange={ handleChange } /> }
+                        { (currentTab === TABS[3]) &&
+                            <NavigatorRoomSettingsVipChatTabView roomData={ roomData } handleChange={ handleChange } /> }
+                        { (currentTab === TABS[4]) &&
+                            <NavigatorRoomSettingsModTabView roomData={ roomData } handleChange={ handleChange } /> }
+                    </NitroCardContentView>
+                </NitroCardView>
+            ) }
+        </Transition>
     );
 };

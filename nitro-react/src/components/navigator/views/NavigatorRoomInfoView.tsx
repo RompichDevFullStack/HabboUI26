@@ -1,19 +1,35 @@
 import { GetCustomRoomFilterMessageComposer, NavigatorSearchComposer, RoomMuteComposer, RoomSettingsComposer, SecurityLevel, ToggleStaffPickMessageComposer, UpdateHomeRoomMessageComposer } from '@nitrots/nitro-renderer';
-import { FC, useEffect, useState } from 'react';
+import { CSSProperties, FC, useEffect, useState } from 'react';
 import { FaLink } from 'react-icons/fa';
+import { Transition } from 'react-transition-group';
 import { CreateLinkEvent, DispatchUiEvent, GetGroupInformation, GetSessionDataManager, LocalizeText, ReportType, SendMessageComposer } from '../../../api';
-import { Button, classNames, Column, Flex, LayoutBadgeImageView, LayoutRoomThumbnailView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text, UserProfileIconView } from '../../../common';
+import { Button, classNames, Column, DraggableWindowPosition, Flex, LayoutBadgeImageView, LayoutRoomThumbnailView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text, UserProfileIconView } from '../../../common';
 import { RoomWidgetThumbnailEvent } from '../../../events';
 import { useHelp, useNavigator } from '../../../hooks';
 
+const SLIDE_TIMEOUT = 300;
+
+const SLIDE_DEFAULT_STYLE: CSSProperties = {
+    transition: `transform ${ SLIDE_TIMEOUT }ms ease-out`,
+    transform: 'translateX(-100%)'
+};
+
+const SLIDE_TRANSITION_STYLES: { [ state: string ]: CSSProperties } = {
+    entering: { transform: 'translateX(0)' },
+    entered: { transform: 'translateX(0)' },
+    exiting: { transform: 'translateX(-100%)' },
+    exited: { transform: 'translateX(-100%)' }
+};
+
 export class NavigatorRoomInfoViewProps
 {
+    isVisible: boolean;
     onCloseClick: () => void;
 }
 
 export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
 {
-    const { onCloseClick = null } = props;
+    const { isVisible = false, onCloseClick = null } = props;
     const [ isRoomPicked, setIsRoomPicked ] = useState(false);
     const [ isRoomMuted, setIsRoomMuted ] = useState(false);
     const { report = null } = useHelp();
@@ -99,10 +115,12 @@ export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
     if(!navigatorData.enteredGuestRoom) return null;
 
     return (
-        <NitroCardView className="nitro-room-info" theme="primary-slim">
-            <NitroCardHeaderView headerText={ LocalizeText('navigator.roomsettings.roominfo') } onCloseClick={ () => processAction('close') } />
-            <NitroCardContentView className="text-black">
-                { navigatorData.enteredGuestRoom &&
+        <Transition in={ isVisible } appear timeout={ SLIDE_TIMEOUT } unmountOnExit>
+            { state => (
+                <NitroCardView className="nitro-room-info" theme="primary-slim" style={ { ...SLIDE_DEFAULT_STYLE, ...SLIDE_TRANSITION_STYLES[ state ] } } windowPosition={ DraggableWindowPosition.NOTHING } disableDrag>
+                    <NitroCardHeaderView headerText={ LocalizeText('navigator.roomsettings.roominfo') } onCloseClick={ () => processAction('close') } />
+                    <NitroCardContentView classNames={ [ 'theme-dark' ] }>
+                        { navigatorData.enteredGuestRoom &&
                     <>
                         <Flex gap={ 2 } overflow="hidden">
                             <LayoutRoomThumbnailView roomId={ navigatorData.enteredGuestRoom.roomId } customUrl={ navigatorData.enteredGuestRoom.officialRoomPicRef }>
@@ -151,7 +169,7 @@ export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
                                     </Flex> }
                             </Column>
                         </Flex>
-                        <Column gap={ 1 }>
+                        <Column grow justifyContent="center" gap={ 2 } className="nitro-room-info-buttons">
                             { hasPermission('staff_pick') &&
                             <Button onClick={ () => processAction('toggle_pick') }>
                                 { LocalizeText(isRoomPicked ? 'navigator.staffpicks.unpick' : 'navigator.staffpicks.pick') }
@@ -174,7 +192,9 @@ export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
                         </Column>
                     </> }
 
-            </NitroCardContentView>
-        </NitroCardView>
+                    </NitroCardContentView>
+                </NitroCardView>
+            ) }
+        </Transition>
     );
 };
