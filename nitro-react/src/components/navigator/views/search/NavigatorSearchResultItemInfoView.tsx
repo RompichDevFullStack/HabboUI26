@@ -40,7 +40,7 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
 
     return (
         <>
-            <Flex center pointer innerRef={ elementRef } className="navigator-item-info-button" onClick={ event => setIsVisible(prevValue => !prevValue) }>
+            <Flex center pointer innerRef={ elementRef } className="navigator-item-info-button" onClick={ event => { event.stopPropagation(); setIsVisible(prevValue => !prevValue); } }>
                 <Base className="icon icon-navigator-info" />
             </Flex>
             <Overlay show={ isVisible } target={ elementRef.current } placement="left" rootClose onHide={ () => setIsVisible(false) }>

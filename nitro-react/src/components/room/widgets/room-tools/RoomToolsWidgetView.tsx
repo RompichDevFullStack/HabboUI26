@@ -71,29 +71,31 @@ export const RoomToolsWidgetView: FC<{}> = props =>
     }, [ roomName, roomOwner, roomTags ]);
 
     return (
-        <Flex className="nitro-room-tools-container" gap={ 2 }>
-            <Column gap={ 2 } className="nitro-room-tools">
-                <Flex center pointer title={ LocalizeText('room.settings.button.text') } className="nitro-room-tools-bubble" onClick={ () => handleToolClick('settings') }>
-                    <Base className="icon icon-cog" />
-                </Flex>
-                <Flex center pointer title={ LocalizeText('room.zoom.button.text') } onClick={ () => handleToolClick('zoom') } className="nitro-room-tools-bubble">
-                    <Base className={ classNames('icon', (!isZoomedIn && 'icon-zoom-less'), (isZoomedIn && 'icon-zoom-more')) } />
-                </Flex>
-                <Flex center pointer title={ LocalizeText('room.chathistory.button.text') } onClick={ () => handleToolClick('chat_history') } className="nitro-room-tools-bubble">
-                    <Base className="icon icon-chat-history" />
-                </Flex>
-                { navigatorData.canRate &&
-                    <Flex center pointer title={ LocalizeText('room.like.button.text') } onClick={ () => handleToolClick('like_room') } className="nitro-room-tools-bubble">
-                        <Base className="icon icon-like-room" />
-                    </Flex> }
-            </Column>
-            <Column justifyContent="center">
+        <>
+            <Flex className="nitro-room-tools-container" gap={ 2 }>
+                <Column gap={ 2 } className="nitro-room-tools">
+                    <Flex center pointer title={ LocalizeText('room.settings.button.text') } className="nitro-room-tools-bubble" onClick={ () => handleToolClick('settings') }>
+                        <Base className="icon icon-cog" />
+                    </Flex>
+                    <Flex center pointer title={ LocalizeText('room.zoom.button.text') } onClick={ () => handleToolClick('zoom') } className="nitro-room-tools-bubble">
+                        <Base className={ classNames('icon', (!isZoomedIn && 'icon-zoom-less'), (isZoomedIn && 'icon-zoom-more')) } />
+                    </Flex>
+                    <Flex center pointer title={ LocalizeText('room.chathistory.button.text') } onClick={ () => handleToolClick('chat_history') } className="nitro-room-tools-bubble">
+                        <Base className="icon icon-chat-history" />
+                    </Flex>
+                    { navigatorData.canRate &&
+                        <Flex center pointer title={ LocalizeText('room.like.button.text') } onClick={ () => handleToolClick('like_room') } className="nitro-room-tools-bubble">
+                            <Base className="icon icon-like-room" />
+                        </Flex> }
+                </Column>
+            </Flex>
+            <Flex justifyContent="center" className="nitro-room-notification-container">
                 <TransitionAnimation type={ TransitionAnimationTypes.SLIDE_LEFT } inProp={ isOpen } timeout={ 300 }>
                     <Column center>
                         <Column className="nitro-room-tools-info rounded py-2 px-3">
                             <Column gap={ 1 }>
-                                <Text wrap variant="white" fontSize={ 4 }>{ roomName }</Text>
-                                <Text variant="muted" fontSize={ 5 }>{ roomOwner }</Text>
+                                <Text wrap variant="white" fontSize={ 4 }>{ `Bienvenue chez ${ roomName }` }</Text>
+                                <Text variant="muted" fontSize={ 5 }>{ `tu es chez ${ roomOwner }` }</Text>
                             </Column>
                             { roomTags && roomTags.length > 0 &&
                                 <Flex gap={ 2 }>
@@ -102,7 +104,7 @@ export const RoomToolsWidgetView: FC<{}> = props =>
                         </Column>
                     </Column>
                 </TransitionAnimation>
-            </Column>
-        </Flex>
+            </Flex>
+        </>
     );
 }

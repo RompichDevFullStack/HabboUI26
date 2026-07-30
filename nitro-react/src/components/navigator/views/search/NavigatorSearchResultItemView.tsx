@@ -80,14 +80,14 @@ export const NavigatorSearchResultItemView: FC<NavigatorSearchResultItemViewProp
     }
 
     return (
-        <Column gap={ 1 } className="navigator-item" { ...rest }>
+        <Column gap={ 1 } pointer className="navigator-item" onClick={ visitRoom } { ...rest }>
             <Flex alignItems="center" gap={ 2 } className="navigator-item-top">
-                <Flex pointer position="relative" onClick={ visitRoom } className="navigator-item-thumbnail-container">
+                <Flex position="relative" className="navigator-item-thumbnail-container">
                     <LayoutRoomThumbnailView roomId={ roomData.roomId } customUrl={ roomData.officialRoomPicRef } className="navigator-item-thumbnail" />
                     { (roomData.doorMode !== RoomDataParser.OPEN_STATE) &&
                         <i className={ ('position-absolute top-0 end-0 m-1 icon icon-navigator-room-' + ((roomData.doorMode === RoomDataParser.DOORBELL_STATE) ? 'locked' : (roomData.doorMode === RoomDataParser.PASSWORD_STATE) ? 'password' : (roomData.doorMode === RoomDataParser.INVISIBLE_STATE) ? 'invisible' : '')) } /> }
                 </Flex>
-                <Column gap={ 0 } grow className="navigator-item-info" pointer onClick={ visitRoom }>
+                <Column gap={ 0 } grow className="navigator-item-info">
                     <Text bold truncate variant="white" className="navigator-item-name">{ roomData.roomName }</Text>
                     <Text truncate underline pointer variant={ null } className="navigator-item-owner" onClick={ event => { event.stopPropagation(); GetUserProfile(roomData.ownerId); } }>{ roomData.ownerName }</Text>
                 </Column>

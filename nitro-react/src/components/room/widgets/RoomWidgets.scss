@@ -27,12 +27,26 @@
             background-position: center;
         }
     }
+}
+
+.nitro-room-notification-container {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: $rightside-zindex;
+    pointer-events: none;
 
     .nitro-room-tools-info {
+        pointer-events: all;
         background: rgba($dark, .95);
+        border: 2px solid rgba($white, 0.3);
         box-shadow: inset 0px 5px lighten(rgba($dark, .6), 2.5), inset 0 -4px darken(rgba($dark, .6), 4);
         transition: all .2s ease;
-        max-width: 250px;
+        width: 400px;
+        max-width: 90vw;
+        align-items: center;
+        text-align: center;
     }
 }
 
