@@ -1,10 +1,25 @@
 import { FollowFriendMessageComposer, ILinkEventTracker } from '@nitrots/nitro-renderer';
-import { FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { CSSProperties, FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import { Transition } from 'react-transition-group';
 import { AddEventLinkTracker, GetSessionDataManager, GetUserProfile, LocalizeText, RemoveLinkEventTracker, ReportType, SendMessageComposer } from '../../../../api';
-import { Base, Button, ButtonGroup, Column, Flex, Grid, LayoutAvatarImageView, LayoutBadgeImageView, LayoutGridItem, LayoutItemCountView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../../common';
+import { Base, Button, ButtonGroup, Column, DraggableWindowPosition, Flex, Grid, LayoutAvatarImageView, LayoutBadgeImageView, LayoutGridItem, LayoutItemCountView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../../common';
 import { useHelp, useMessenger } from '../../../../hooks';
 import { FriendsMessengerThreadView } from './messenger-thread/FriendsMessengerThreadView';
+
+const SLIDE_TIMEOUT = 300;
+
+const SLIDE_DEFAULT_STYLE: CSSProperties = {
+    transition: `transform ${ SLIDE_TIMEOUT }ms ease-out`,
+    transform: 'translateX(-100%)'
+};
+
+const SLIDE_TRANSITION_STYLES: { [ state: string ]: CSSProperties } = {
+    entering: { transform: 'translateX(0)' },
+    entered: { transform: 'translateX(0)' },
+    exiting: { transform: 'translateX(-100%)' },
+    exited: { transform: 'translateX(-100%)' }
+};
 
 export const FriendsMessengerView: FC<{}> = props =>
 {
@@ -103,12 +118,12 @@ export const FriendsMessengerView: FC<{}> = props =>
         }
     }, [ isVisible, activeThread, lastThreadId, visibleThreads, setActiveThreadId ]);
 
-    if(!isVisible) return null;
-
     return (
-        <NitroCardView className="nitro-friends-messenger" uniqueKey="nitro-friends-messenger" theme="primary-slim">
+        <Transition in={ isVisible } appear timeout={ SLIDE_TIMEOUT } unmountOnExit>
+            { state => (
+                <NitroCardView className="nitro-friends-messenger" uniqueKey="nitro-friends-messenger" theme="primary-slim" style={ { ...SLIDE_DEFAULT_STYLE, ...SLIDE_TRANSITION_STYLES[ state ] } } windowPosition={ DraggableWindowPosition.NOTHING } disableDrag>
             <NitroCardHeaderView headerText={ LocalizeText('messenger.window.title', [ 'OPEN_CHAT_COUNT' ], [ visibleThreads.length.toString() ]) } onCloseClick={ event => setIsVisible(false) } />
-            <NitroCardContentView>
+            <NitroCardContentView classNames={ [ 'theme-dark' ] }>
                 <Grid overflow="hidden">
                     <Column size={ 4 } overflow="hidden">
                         <Text bold>{ LocalizeText('toolbar.icon.label.messenger') }</Text>
@@ -172,6 +187,8 @@ export const FriendsMessengerView: FC<{}> = props =>
                     </Column>
                 </Grid>
             </NitroCardContentView>
-        </NitroCardView>
+                </NitroCardView>
+            ) }
+        </Transition>
     );
 }

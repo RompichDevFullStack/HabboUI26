@@ -1,4 +1,26 @@
+.draggable-window:has(.nitro-chat-history) {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    height: 100vh !important;
+}
+
 .nitro-chat-history {
-    width: $chat-history-width;
-    height: $chat-history-height;
+    width: 500px;
+    height: 100% !important;
+    border-radius: 0;
+
+    .nitro-card-header {
+        background: $black !important;
+        box-shadow: none !important;
+    }
+
+    .content-area {
+        background-color: $black !important;
+        font-size: 15px;
+    }
+
+    .text-black {
+        color: $white !important;
+    }
 }

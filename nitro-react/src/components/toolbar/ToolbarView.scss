@@ -45,6 +45,11 @@
         top: 50%;
         transform: translate(-50%, -50%);
         width: 40%;
+        pointer-events: none;
+
+        > * {
+            pointer-events: all;
+        }
 
         @include media-breakpoint-down(sm) {
             width: 0px;
@@ -82,7 +87,7 @@
 .nitro-toolbar-me {
     position: absolute;
     bottom: 10px;
-    left: 45px;
+    left: 90px;
     width: 170px;
     height: 130px;
     z-index: $toolbar-memenu-zindex;
@@ -148,8 +153,8 @@
             box-shadow: 0 0 0 3px rgba(76, 175, 80, .35), inset 2px 2px rgba(255, 255, 255, .15), inset -2px -2px rgba(255, 255, 255, .15);
 
             .avatar-image {
-                margin-left: -6px;
-                margin-top: 34px;
+margin-left: 0px;
+    margin-top: 40px;
             }
 
             &:hover {

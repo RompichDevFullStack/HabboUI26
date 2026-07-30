@@ -72,12 +72,20 @@ export const RoomToolsWidgetView: FC<{}> = props =>
 
     return (
         <Flex className="nitro-room-tools-container" gap={ 2 }>
-            <Column center className="nitro-room-tools p-2">
-                <Base pointer title={ LocalizeText('room.settings.button.text') } className="icon icon-cog" onClick={ () => handleToolClick('settings') } />
-                <Base pointer title={ LocalizeText('room.zoom.button.text') } onClick={ () => handleToolClick('zoom') } className={ classNames('icon', (!isZoomedIn && 'icon-zoom-less'), (isZoomedIn && 'icon-zoom-more')) } />
-                <Base pointer title={ LocalizeText('room.chathistory.button.text') } onClick={ () => handleToolClick('chat_history') } className="icon icon-chat-history" />
+            <Column gap={ 2 } className="nitro-room-tools">
+                <Flex center pointer title={ LocalizeText('room.settings.button.text') } className="nitro-room-tools-bubble" onClick={ () => handleToolClick('settings') }>
+                    <Base className="icon icon-cog" />
+                </Flex>
+                <Flex center pointer title={ LocalizeText('room.zoom.button.text') } onClick={ () => handleToolClick('zoom') } className="nitro-room-tools-bubble">
+                    <Base className={ classNames('icon', (!isZoomedIn && 'icon-zoom-less'), (isZoomedIn && 'icon-zoom-more')) } />
+                </Flex>
+                <Flex center pointer title={ LocalizeText('room.chathistory.button.text') } onClick={ () => handleToolClick('chat_history') } className="nitro-room-tools-bubble">
+                    <Base className="icon icon-chat-history" />
+                </Flex>
                 { navigatorData.canRate &&
-                    <Base pointer title={ LocalizeText('room.like.button.text') } onClick={ () => handleToolClick('like_room') } className="icon icon-like-room" /> }
+                    <Flex center pointer title={ LocalizeText('room.like.button.text') } onClick={ () => handleToolClick('like_room') } className="nitro-room-tools-bubble">
+                        <Base className="icon icon-like-room" />
+                    </Flex> }
             </Column>
             <Column justifyContent="center">
                 <TransitionAnimation type={ TransitionAnimationTypes.SLIDE_LEFT } inProp={ isOpen } timeout={ 300 }>

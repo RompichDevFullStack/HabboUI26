@@ -77,14 +77,17 @@ export const ToolbarView: FC<{ isInRoom: boolean }> = props =>
                     { (getFullCount > 0) &&
                         <LayoutItemCountView count={ getFullCount } /> }
                 </Flex>
+                <Flex center pointer className="navigation-item" onClick={ event => OpenMessengerChat() }>
+                    <Base className={ `icon icon-message ${ (iconState === MessengerIconState.UNREAD) && 'is-unseen' }` } />
+                </Flex>
+                { isMod &&
+                    <Flex center pointer className="navigation-item" onClick={ event => CreateLinkEvent('mod-tools/toggle') }>
+                        <Base className="icon icon-modtools" />
+                    </Flex> }
             </Flex>
             <Flex alignItems="center" justifyContent="between" gap={ 2 } className="nitro-toolbar py-1 px-3">
                 <Flex alignItems="center" justifyContent="center" id="toolbar-chat-input-container" className="nitro-toolbar-chat-input-center" />
                 <Flex alignItems="center" gap={ 2 }>
-                    <Flex gap={ 2 }>
-                        { ((iconState === MessengerIconState.SHOW) || (iconState === MessengerIconState.UNREAD)) &&
-                            <Base pointer className={ `navigation-item icon icon-message ${ (iconState === MessengerIconState.UNREAD) && 'is-unseen' }` } onClick={ event => OpenMessengerChat() } /> }
-                    </Flex>
                     <Base id="toolbar-friend-bar-container" className="d-none" />
                 </Flex>
             </Flex>
