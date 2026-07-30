@@ -1,7 +1,7 @@
 import { GroupInformationComposer, GroupInformationEvent, GroupInformationParser, HabboGroupEntryData } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
 import { SendMessageComposer, ToggleFavoriteGroup } from '../../../api';
-import { AutoGrid, Base, Column, Flex, Grid, GridProps, LayoutBadgeImageView, LayoutGridItem } from '../../../common';
+import { AutoGrid, Column, Grid, GridProps, LayoutBadgeImageView, LayoutGridItem } from '../../../common';
 import { useMessageEvent } from '../../../hooks';
 import { GroupInformationView } from '../../groups/views/GroupInformationView';
 
@@ -52,18 +52,7 @@ export const GroupsContainerView: FC<GroupsContainerViewProps> = props =>
         }
     }, [ groups ]);
 
-    if(!groups || !groups.length)
-    {
-        return (
-            <Column center fullHeight>
-                <Flex justifyContent="center" gap={ 2 }>
-                    <Base className="no-group-spritesheet image-1" />
-                    <Base className="no-group-spritesheet image-2" />
-                    <Base className="no-group-spritesheet image-3" />
-                </Flex>
-            </Column>
-        );
-    }
+    if(!groups || !groups.length) return null;
     
     return (
         <Grid overflow={ overflow } gap={ 2 } { ...rest }>

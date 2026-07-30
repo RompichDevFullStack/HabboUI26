@@ -1,24 +1,23 @@
-import { ExtendedProfileChangedMessageEvent, RelationshipStatusInfoEvent, RelationshipStatusInfoMessageParser, RoomEngineObjectEvent, RoomObjectCategory, RoomObjectType, UserCurrentBadgesComposer, UserCurrentBadgesEvent, UserProfileEvent, UserProfileParser, UserRelationshipsComposer } from '@nitrots/nitro-renderer';
+import { ExtendedProfileChangedMessageEvent, RoomEngineObjectEvent, RoomObjectCategory, RoomObjectType, UserCurrentBadgesComposer, UserCurrentBadgesEvent, UserProfileEvent, UserProfileParser } from '@nitrots/nitro-renderer';
 import { FC, useState } from 'react';
-import { CreateLinkEvent, GetRoomSession, GetSessionDataManager, GetUserProfile, LocalizeText, SendMessageComposer } from '../../api';
-import { Column, Flex, Grid, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../common';
+import { FaChevronRight, FaExclamationTriangle } from 'react-icons/fa';
+import { CreateLinkEvent, GetRoomSession, GetSessionDataManager, GetUserProfile, LocalizeText, OpenMessengerChat, SendMessageComposer } from '../../api';
+import { DraggableWindowPosition, Flex, Grid, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../common';
 import { useMessageEvent, useRoomEngineEvent } from '../../hooks';
 import { BadgesContainerView } from './views/BadgesContainerView';
-import { FriendsContainerView } from './views/FriendsContainerView';
 import { GroupsContainerView } from './views/GroupsContainerView';
 import { UserContainerView } from './views/UserContainerView';
+import { UserRoomsContainerView } from './views/UserRoomsContainerView';
 
 export const UserProfileView: FC<{}> = props =>
 {
     const [ userProfile, setUserProfile ] = useState<UserProfileParser>(null);
     const [ userBadges, setUserBadges ] = useState<string[]>([]);
-    const [ userRelationships, setUserRelationships ] = useState<RelationshipStatusInfoMessageParser>(null);
 
     const onClose = () =>
     {
         setUserProfile(null);
         setUserBadges([]);
-        setUserRelationships(null);
     }
 
     const onLeaveGroup = () =>
@@ -37,15 +36,6 @@ export const UserProfileView: FC<{}> = props =>
         setUserBadges(parser.badges);
     });
 
-    useMessageEvent<RelationshipStatusInfoEvent>(RelationshipStatusInfoEvent, event =>
-    {
-        const parser = event.getParser();
-
-        if(!userProfile || (parser.userId !== userProfile.id)) return;
-
-        setUserRelationships(parser);
-    });
-
     useMessageEvent<UserProfileEvent>(UserProfileEvent, event =>
     {
         const parser = event.getParser();
@@ -59,14 +49,9 @@ export const UserProfileView: FC<{}> = props =>
             return parser;
         });
 
-        if(!isSameProfile)
-        {
-            setUserBadges([]);
-            setUserRelationships(null);
-        }
+        if(!isSameProfile) setUserBadges([]);
 
         SendMessageComposer(new UserCurrentBadgesComposer(parser.id));
-        SendMessageComposer(new UserRelationshipsComposer(parser.id));
     });
 
     useMessageEvent<ExtendedProfileChangedMessageEvent>(ExtendedProfileChangedMessageEvent, event =>
@@ -93,29 +78,36 @@ export const UserProfileView: FC<{}> = props =>
 
     if(!userProfile) return null;
 
+    const isOwnProfile = (userProfile.id === GetSessionDataManager().userId);
+
     return (
-        <NitroCardView uniqueKey="nitro-user-profile" theme="primary-slim" className="user-profile">
-            <NitroCardHeaderView headerText={ LocalizeText('extendedprofile.caption') } onCloseClick={ onClose } />
-            <NitroCardContentView overflow="hidden">
-                <Grid fullHeight={ false } gap={ 2 }>
-                    <Column size={ 7 } gap={ 1 } className="user-container pe-2">
-                        <UserContainerView userProfile={ userProfile } />
-                        <Grid columnCount={ 5 } fullHeight className="bg-muted rounded px-2 py-1">
-                            <BadgesContainerView fullWidth center badges={ userBadges } />
-                        </Grid>
-                    </Column>
-                    <Column size={ 5 }>
-                        { userRelationships &&
-                            <FriendsContainerView relationships={ userRelationships } friendsCount={ userProfile.friendsCount } /> }
-                    </Column>
-                </Grid>
-                <Flex alignItems="center" className="rooms-button-container px-2 py-1">
-                    <Flex alignItems="center" gap={ 1 } onClick={ event => CreateLinkEvent(`navigator/search/hotel_view/owner:${ userProfile.username }`) }>
-                        <i className="icon icon-rooms" />
-                        <Text bold underline pointer>{ LocalizeText('extendedprofile.rooms') }</Text>
-                    </Flex>
+        <NitroCardView uniqueKey="nitro-user-profile" theme="primary-slim" className="user-profile" windowPosition={ DraggableWindowPosition.NOTHING } disableDrag>
+            <NitroCardHeaderView headerText={ userProfile.username } onCloseClick={ onClose }>
+                <Flex alignItems="center" justifyContent="center" className="user-profile-header-icon user-profile-header-warning">
+                    <FaExclamationTriangle className="fa-icon" />
                 </Flex>
-                <GroupsContainerView fullWidth itsMe={ userProfile.id === GetSessionDataManager().userId } groups={ userProfile.groups } onLeaveGroup={ onLeaveGroup } />
+            </NitroCardHeaderView>
+            <NitroCardContentView overflow="hidden" classNames={ [ 'theme-dark' ] }>
+                <UserContainerView userProfile={ userProfile } />
+                <Flex alignItems="center" justifyContent="between" className="user-profile-section-header">
+                    <Text bold small className="text-white">Badges & Groups</Text>
+                    <FaChevronRight className="fa-icon user-stat-chevron" />
+                </Flex>
+                <Grid columnCount={ 5 } fullHeight={ false } className="user-profile-badges-grid">
+                    <BadgesContainerView fullWidth center badges={ userBadges } />
+                </Grid>
+                <GroupsContainerView fullWidth itsMe={ isOwnProfile } groups={ userProfile.groups } onLeaveGroup={ onLeaveGroup } />
+                <Flex alignItems="center" justifyContent="between" className="user-profile-section-header" onClick={ event => CreateLinkEvent(`navigator/search/hotel_view/owner:${ userProfile.username }`) } pointer>
+                    <Text bold small className="text-white">{ LocalizeText('extendedprofile.rooms') }</Text>
+                    <FaChevronRight className="fa-icon user-stat-chevron" />
+                </Flex>
+                <UserRoomsContainerView username={ userProfile.username } />
+                { !isOwnProfile &&
+                    <Flex alignItems="center" justifyContent="center" gap={ 3 } className="user-profile-quick-actions">
+                        <Flex center pointer className="user-profile-ghost-icon" onClick={ event => OpenMessengerChat(userProfile.id) }>
+                            <i className="icon icon-message" />
+                        </Flex>
+                    </Flex> }
             </NitroCardContentView>
         </NitroCardView>
     )
