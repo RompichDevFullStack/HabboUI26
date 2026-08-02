@@ -1,8 +1,9 @@
 import { CatalogGroupsComposer } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
 import { SendMessageComposer } from '../../../../../api';
-import { Base, Column, Flex, Grid, Text } from '../../../../../common';
+import { Base, Column, Flex, Grid } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
+import { CatalogItemNameView } from '../common/CatalogItemNameView';
 import { CatalogFirstProductSelectorWidgetView } from '../widgets/CatalogFirstProductSelectorWidgetView';
 import { CatalogGuildSelectorWidgetView } from '../widgets/CatalogGuildSelectorWidgetView';
 import { CatalogPurchaseWidgetView } from '../widgets/CatalogPurchaseWidgetView';
@@ -32,7 +33,7 @@ export const CatalogLayouGuildForumView: FC<CatalogLayoutProps> = props =>
                     { !!currentOffer &&
                         <>
                             <Column grow gap={ 1 }>
-                                <Text truncate>{ currentOffer.localizationName }</Text>
+                                <CatalogItemNameView offer={ currentOffer } />
                                 <Base grow>
                                     <CatalogGuildSelectorWidgetView />
                                 </Base>

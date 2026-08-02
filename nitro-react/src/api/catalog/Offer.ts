@@ -148,11 +148,7 @@ export class Offer implements IPurchasableOffer
 
     public get localizationName(): string
     {
-        const productData = GetProductDataForLocalization(this._localizationId);
-
-        if(productData) return productData.name;
-
-        return LocalizeText(this._localizationId);
+        return this._localizationId;
     }
 
     public get localizationDescription(): string

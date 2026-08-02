@@ -4,6 +4,7 @@ export * from './BuildersClubSubscriptionStatusMessageParser';
 export * from './BundleDiscountRuleset';
 export * from './BundleDiscountRulesetMessageParser';
 export * from './CatalogIndexMessageParser';
+export * from './CatalogItemNameParser';
 export * from './CatalogLocalizationData';
 export * from './CatalogPageExpirationParser';
 export * from './CatalogPageMessageOfferData';

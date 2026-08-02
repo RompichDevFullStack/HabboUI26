@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { LocalizeText } from '../../../../../api';
 import { Base, Column, Flex, Grid, Text } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
+import { CatalogItemNameView } from '../common/CatalogItemNameView';
 import { CatalogBadgeSelectorWidgetView } from '../widgets/CatalogBadgeSelectorWidgetView';
 import { CatalogFirstProductSelectorWidgetView } from '../widgets/CatalogFirstProductSelectorWidgetView';
 import { CatalogItemGridWidgetView } from '../widgets/CatalogItemGridWidgetView';
@@ -40,7 +41,7 @@ export const CatalogLayoutBadgeDisplayView: FC<CatalogLayoutProps> = props =>
                             </Base>
                             <Column grow gap={ 1 }>
                                 <CatalogLimitedItemWidgetView fullWidth />
-                                <Text grow truncate>{ currentOffer.localizationName }</Text>
+                                <CatalogItemNameView grow offer={ currentOffer } />
                                 <Flex justifyContent="end">
                                     <CatalogTotalPriceWidget alignItems="end" />
                                 </Flex>

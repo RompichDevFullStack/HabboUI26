@@ -100,6 +100,10 @@ public abstract class CatalogPage implements Comparable<CatalogPage>, ISerialize
         return this.caption;
     }
 
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
     public String getPageName() {
         return this.pageName;
     }

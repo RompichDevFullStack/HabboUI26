@@ -238,6 +238,9 @@ public class PacketManager {
         this.registerHandler(Incoming.RequestCatalogPageEvent, RequestCatalogPageEvent.class);
         this.registerHandler(Incoming.CatalogBuyItemAsGiftEvent, CatalogBuyItemAsGiftEvent.class);
         this.registerHandler(Incoming.CatalogBuyItemEvent, CatalogBuyItemEvent.class);
+        this.registerHandler(Incoming.RenameCatalogPageEvent, RenameCatalogPageEvent.class);
+        this.registerHandler(Incoming.RenameCatalogItemEvent, RenameCatalogItemEvent.class);
+        this.registerHandler(Incoming.RequestCatalogItemNameEvent, RequestCatalogItemNameEvent.class);
         this.registerHandler(Incoming.RedeemVoucherEvent, RedeemVoucherEvent.class);
         this.registerHandler(Incoming.ReloadRecyclerEvent, ReloadRecyclerEvent.class);
         this.registerHandler(Incoming.RecycleEvent, RecycleEvent.class);

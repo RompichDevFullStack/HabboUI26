@@ -22,6 +22,7 @@ public class Outgoing {
     public final static int UserBannerComposer = 9006;
     public final static int InventoryBannersComposer = 9004;
     public final static int FurniEditorDataComposer = 9008;
+    public final static int CatalogItemNameComposer = 9013;
     public final static int RecyclerCompleteComposer = 468;
     public final static int GuildBuyRoomsComposer = 2159;
     public final static int FriendsComposer = 3130;

@@ -20,7 +20,7 @@ public class RoomUserWalkEvent extends MessageHandler {
 
     @Override
     public int getRatelimit() {
-        return 500;
+        return 100;
     }
 
     @Override

@@ -1,9 +1,9 @@
-import { IRoomSession, RoomObjectVariable, RoomPreviewer, Vector3d } from '@nitrots/nitro-renderer';
+import { CatalogItemNameEvent, IRoomSession, RequestCatalogItemNameComposer, RoomObjectVariable, RoomPreviewer, Vector3d } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
-import { attemptItemPlacement, DispatchUiEvent, FurniCategory, GetRoomEngine, GetSessionDataManager, GroupItem, LocalizeText, UnseenItemCategory } from '../../../../api';
+import { attemptItemPlacement, DispatchUiEvent, FurniCategory, GetRoomEngine, GetSessionDataManager, GroupItem, LocalizeText, SendMessageComposer, UnseenItemCategory } from '../../../../api';
 import { AutoGrid, Button, Column, Grid, LayoutLimitedEditionCompactPlateView, LayoutRarityLevelView, LayoutRoomPreviewerView, Text } from '../../../../common';
 import { CatalogPostMarketplaceOfferEvent } from '../../../../events';
-import { useInventoryFurni, useInventoryUnseenTracker } from '../../../../hooks';
+import { useInventoryFurni, useInventoryUnseenTracker, useMessageEvent } from '../../../../hooks';
 import { InventoryCategoryEmptyView } from '../InventoryCategoryEmptyView';
 import { InventoryFurnitureItemView } from './InventoryFurnitureItemView';
 import { InventoryFurnitureSearchView } from './InventoryFurnitureSearchView';
@@ -32,6 +32,25 @@ export const InventoryFurnitureView: FC<InventoryFurnitureViewProps> = props =>
     const [ filteredGroupItems, setFilteredGroupItems ] = useState<GroupItem[]>([]);
     const { groupItems = [], selectedItem = null, activate = null, deactivate = null } = useInventoryFurni();
     const { resetItems = null } = useInventoryUnseenTracker();
+    const [ catalogName, setCatalogName ] = useState<string>(null);
+
+    useMessageEvent<CatalogItemNameEvent>(CatalogItemNameEvent, event =>
+    {
+        const parser = event.getParser();
+
+        if(!selectedItem || (parser.typeId !== selectedItem.type)) return;
+
+        setCatalogName((parser.name && parser.name.length) ? parser.name : null);
+    });
+
+    useEffect(() =>
+    {
+        setCatalogName(null);
+
+        if(!selectedItem || (selectedItem.type <= 0)) return;
+
+        SendMessageComposer(new RequestCatalogItemNameComposer(selectedItem.type));
+    }, [ selectedItem ]);
 
     useEffect(() =>
     {
@@ -128,7 +147,7 @@ export const InventoryFurnitureView: FC<InventoryFurnitureViewProps> = props =>
                 </Column>
                 { selectedItem &&
                     <Column grow justifyContent="between" gap={ 2 }>
-                        <Text grow truncate>{ selectedItem.name }</Text>
+                        <Text grow truncate>{ catalogName || selectedItem.name }</Text>
                         <Column gap={ 1 }>
                             { !!roomSession &&
                                 <Button variant="success" onClick={ event => attemptItemPlacement(selectedItem) }>

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Column, Flex, Grid, Text } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
+import { CatalogItemNameView } from '../common/CatalogItemNameView';
 import { CatalogItemGridWidgetView } from '../widgets/CatalogItemGridWidgetView';
 import { CatalogPurchaseWidgetView } from '../widgets/CatalogPurchaseWidgetView';
 import { CatalogTotalPriceWidget } from '../widgets/CatalogTotalPriceWidget';
@@ -43,7 +44,7 @@ export const CatalogLayoutTrophiesView: FC<CatalogLayoutProps> = props =>
                     <>
                         <CatalogViewProductWidgetView />
                         <Column grow gap={ 1 }>
-                            <Text grow truncate>{ currentOffer.localizationName }</Text>
+                            <CatalogItemNameView grow offer={ currentOffer } />
                             <Flex justifyContent="end">
                                 <CatalogTotalPriceWidget alignItems="end" />
                             </Flex>

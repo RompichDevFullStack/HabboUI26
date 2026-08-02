@@ -4,11 +4,18 @@ import { AvatarEditorGridPartItem } from './AvatarEditorGridPartItem';
 
 export class CategoryData
 {
+    private static readonly COLOR_UPDATE_CHUNK_SIZE = 8;
+    // Roughly the number of grid cells visible before scrolling — updated synchronously (no frame delay) so the on-screen grid never visibly lags.
+    private static readonly COLOR_UPDATE_IMMEDIATE_COUNT = 30;
+
     private _name: string;
     private _parts: AvatarEditorGridPartItem[];
     private _palettes: AvatarEditorGridColorItem[][];
     private _selectedPartIndex: number = -1;
     private _paletteIndexes: number[];
+    private _colorUpdateFrame: number = null;
+    private _colorUpdateQueue: AvatarEditorGridPartItem[] = null;
+    private _pendingPartColors: IPartColor[] = null;
 
     constructor(name: string, partItems: AvatarEditorGridPartItem[], colorItems: AvatarEditorGridColorItem[][])
     {
@@ -51,6 +58,16 @@ export class CategoryData
 
     public dispose(): void
     {
+        if(this._colorUpdateFrame !== null)
+        {
+            cancelAnimationFrame(this._colorUpdateFrame);
+
+            this._colorUpdateFrame = null;
+        }
+
+        this._colorUpdateQueue = null;
+        this._pendingPartColors = null;
+
         if(this._parts)
         {
             for(const part of this._parts) part.dispose();
@@ -331,9 +348,80 @@ export class CategoryData
     {
         const partColors = this.getSelectedColors();
 
-        for(const partItem of this._parts)
+        if(this._colorUpdateFrame !== null)
         {
+            cancelAnimationFrame(this._colorUpdateFrame);
+
+            this._colorUpdateFrame = null;
+        }
+
+        this._pendingPartColors = partColors;
+
+        const queue = this._parts.slice();
+
+        // Prioritize the currently selected part so its thumbnail (the one most likely visible) updates first.
+        if((this._selectedPartIndex >= 0) && (this._selectedPartIndex < queue.length))
+        {
+            const [ selected ] = queue.splice(this._selectedPartIndex, 1);
+
+            if(selected) queue.unshift(selected);
+        }
+
+        // Update the on-screen batch synchronously (no frame delay) so the visible grid never appears to lag.
+        let processed = 0;
+
+        while(queue.length && (processed < CategoryData.COLOR_UPDATE_IMMEDIATE_COUNT))
+        {
+            const partItem = queue.shift();
+
             if(partItem) partItem.partColors = partColors;
+
+            processed++;
+        }
+
+        if(!queue.length)
+        {
+            this._colorUpdateQueue = null;
+
+            return;
+        }
+
+        this._colorUpdateQueue = queue;
+
+        this.processColorUpdateChunk();
+    }
+
+    private processColorUpdateChunk(): void
+    {
+        const queue = this._colorUpdateQueue;
+        const partColors = this._pendingPartColors;
+
+        if(!queue)
+        {
+            this._colorUpdateFrame = null;
+
+            return;
+        }
+
+        let processed = 0;
+
+        while(queue.length && (processed < CategoryData.COLOR_UPDATE_CHUNK_SIZE))
+        {
+            const partItem = queue.shift();
+
+            if(partItem) partItem.partColors = partColors;
+
+            processed++;
+        }
+
+        if(queue.length)
+        {
+            this._colorUpdateFrame = requestAnimationFrame(() => this.processColorUpdateChunk());
+        }
+        else
+        {
+            this._colorUpdateFrame = null;
+            this._colorUpdateQueue = null;
         }
     }
 

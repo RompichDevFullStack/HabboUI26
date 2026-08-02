@@ -5,6 +5,7 @@ import { IPurchasableOffer } from '../../../../../api';
 import { AutoGrid, Base, Button, Column, Flex, Grid, LayoutGridItem, Text } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
 import { CatalogGridOfferView } from '../common/CatalogGridOfferView';
+import { CatalogItemNameView } from '../common/CatalogItemNameView';
 import { CatalogAddOnBadgeWidgetView } from '../widgets/CatalogAddOnBadgeWidgetView';
 import { CatalogLimitedItemWidgetView } from '../widgets/CatalogLimitedItemWidgetView';
 import { CatalogPurchaseWidgetView } from '../widgets/CatalogPurchaseWidgetView';
@@ -160,7 +161,7 @@ export const CatalogLayoutColorGroupingView : FC<CatalogLayoutColorGroupViewProp
                         </Base>
                         <Column grow gap={ 1 }>
                             <CatalogLimitedItemWidgetView fullWidth />
-                            <Text grow truncate>{ currentOffer.localizationName }</Text>
+                            <CatalogItemNameView grow offer={ currentOffer } />
                             <Flex justifyContent="between">
                                 <Column gap={ 1 }>
                                     <CatalogSpinnerWidgetView />

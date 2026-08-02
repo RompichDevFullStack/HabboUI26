@@ -20,6 +20,9 @@ public class Incoming {
     public static final int RequestInventoryBannersEvent = 9001;
     public static final int RequestFurniEditorDataEvent = 9007;
     public static final int SaveFurniEditorDataEvent = 9009;
+    public static final int RenameCatalogPageEvent = 9010;
+    public static final int RenameCatalogItemEvent = 9011;
+    public static final int RequestCatalogItemNameEvent = 9012;
     public static final int BotPickupEvent = 3323;
     public static final int HorseRideEvent = 1036;
     public static final int RequestCreateRoomEvent = 2752;

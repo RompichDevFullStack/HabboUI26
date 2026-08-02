@@ -619,6 +619,23 @@ public class CatalogManager {
         return item[0];
     }
 
+    public CatalogItem getCatalogItemByBaseItemId(int baseItemId) {
+        synchronized (this.catalogPages) {
+            for (CatalogPage page : this.catalogPages.valueCollection()) {
+                for (CatalogItem item : page.getCatalogItems().valueCollection()) {
+                    for (Item baseItem : item.getBaseItems()) {
+                        // baseItemId may be either the items_base id (used by the room engine) or the sprite id (used by the inventory).
+                        if ((baseItem.getId() == baseItemId) || (baseItem.getSpriteId() == baseItemId)) {
+                            return item;
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
 
     public List<CatalogPage> getCatalogPages(int parentId, final Habbo habbo) {
         final List<CatalogPage> pages = new ArrayList<>();

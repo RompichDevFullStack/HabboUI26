@@ -2,6 +2,7 @@ import { NitroPoint } from '@nitrots/nitro-renderer';
 import { FC, useEffect } from 'react';
 import { Base, Column, Flex, Grid, Text } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
+import { CatalogItemNameView } from '../common/CatalogItemNameView';
 import { CatalogPurchaseWidgetView } from '../widgets/CatalogPurchaseWidgetView';
 import { CatalogSpacesWidgetView } from '../widgets/CatalogSpacesWidgetView';
 import { CatalogTotalPriceWidget } from '../widgets/CatalogTotalPriceWidget';
@@ -35,7 +36,7 @@ export const CatalogLayoutSpacesView: FC<CatalogLayoutProps> = props =>
                             <CatalogViewProductWidgetView />
                         </Base>
                         <Column grow gap={ 1 }>
-                            <Text grow truncate>{ currentOffer.localizationName }</Text>
+                            <CatalogItemNameView grow offer={ currentOffer } />
                             <Flex justifyContent="end">
                                 <CatalogTotalPriceWidget alignItems="end" />
                             </Flex>

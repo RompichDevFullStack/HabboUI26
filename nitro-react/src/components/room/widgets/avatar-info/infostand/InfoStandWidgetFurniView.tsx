@@ -1,4 +1,4 @@
-import { CrackableDataType, GroupInformationComposer, GroupInformationEvent, NowPlayingEvent, RoomControllerLevel, RoomObjectCategory, RoomObjectOperationType, RoomObjectVariable, RoomWidgetEnumItemExtradataParameter, RoomWidgetFurniInfoUsagePolicyEnum, SetObjectDataMessageComposer, SongInfoReceivedEvent, StringDataType } from '@nitrots/nitro-renderer';
+import { CatalogItemNameEvent, CrackableDataType, GroupInformationComposer, GroupInformationEvent, NowPlayingEvent, RequestCatalogItemNameComposer, RoomControllerLevel, RoomObjectCategory, RoomObjectOperationType, RoomObjectVariable, RoomWidgetEnumItemExtradataParameter, RoomWidgetFurniInfoUsagePolicyEnum, SetObjectDataMessageComposer, SongInfoReceivedEvent, StringDataType } from '@nitrots/nitro-renderer';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { AvatarInfoFurni, CreateLinkEvent, GetGroupInformation, GetNitroInstance, GetRoomEngine, GetSessionDataManager, LocalizeText, SendMessageComposer } from '../../../../../api';
@@ -44,6 +44,7 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
     const [ positionZ, setPositionZ ] = useState(0);
     const [ rotation, setRotation ] = useState(0);
     const [ stateIndex, setStateIndex ] = useState(0);
+    const [ catalogName, setCatalogName ] = useState<string>(null);
 
     useSoundEvent<NowPlayingEvent>(NowPlayingEvent.NPE_SONG_CHANGED, event =>
     {
@@ -197,6 +198,24 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
 
         if(avatarInfo.groupId) SendMessageComposer(new GroupInformationComposer(avatarInfo.groupId, false));
     }, [ roomSession, avatarInfo ]);
+
+    useMessageEvent<CatalogItemNameEvent>(CatalogItemNameEvent, event =>
+    {
+        const parser = event.getParser();
+
+        if(!avatarInfo || (parser.typeId !== avatarInfo.typeId)) return;
+
+        setCatalogName((parser.name && parser.name.length) ? parser.name : null);
+    });
+
+    useEffect(() =>
+    {
+        setCatalogName(null);
+
+        if(!avatarInfo || (avatarInfo.typeId <= 0)) return;
+
+        SendMessageComposer(new RequestCatalogItemNameComposer(avatarInfo.typeId));
+    }, [ avatarInfo ]);
 
     useEffect(() =>
     {
@@ -370,7 +389,7 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
                 <Column overflow="visible" className="container-fluid content-area" gap={ 1 }>
                     <Column gap={ 1 }>
                         <Flex alignItems="center" justifyContent="between" gap={ 1 }>
-                            <Text variant="white" small wrap>{ avatarInfo.name }</Text>
+                            <Text variant="white" small wrap>{ catalogName || avatarInfo.name }</Text>
                             <FaTimes className="cursor-pointer fa-icon" onClick={ onClose } />
                         </Flex>
                         <hr className="m-0" />
@@ -388,10 +407,6 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
                             { avatarInfo.image && avatarInfo.image.src.length && 
                                 <img className="d-block mx-auto" src={ avatarInfo.image.src } alt="" /> }
                         </Flex>
-                        <hr className="m-0" />
-                    </Column>
-                    <Column gap={ 1 }>
-                        <Text fullWidth wrap textBreak variant="white" small>{ avatarInfo.description }</Text>
                         <hr className="m-0" />
                     </Column>
                     <Column gap={ 1 }>

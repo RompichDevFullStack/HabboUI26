@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Base, Column, Flex, Grid, Text } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
+import { CatalogItemNameView } from '../common/CatalogItemNameView';
 import { CatalogGuildBadgeWidgetView } from '../widgets/CatalogGuildBadgeWidgetView';
 import { CatalogGuildSelectorWidgetView } from '../widgets/CatalogGuildSelectorWidgetView';
 import { CatalogItemGridWidgetView } from '../widgets/CatalogItemGridWidgetView';
@@ -32,7 +33,7 @@ export const CatalogLayouGuildCustomFurniView: FC<CatalogLayoutProps> = props =>
                             <CatalogGuildBadgeWidgetView position="absolute" className="bottom-1 end-1" />
                         </Base>
                         <Column grow gap={ 1 }>
-                            <Text truncate>{ currentOffer.localizationName }</Text>
+                            <CatalogItemNameView offer={ currentOffer } />
                             <Base grow>
                                 <CatalogGuildSelectorWidgetView />
                             </Base>

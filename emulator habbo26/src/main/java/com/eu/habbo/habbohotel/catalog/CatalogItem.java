@@ -129,6 +129,10 @@ public class CatalogItem implements ISerialize, Runnable, Comparable<CatalogItem
         return this.name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getCredits() {
         return this.credits;
     }
