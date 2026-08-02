@@ -29,6 +29,7 @@ public class FurniEditorDataComposer extends MessageComposer {
         this.response.appendBoolean(this.item.allowMarketplace());
         this.response.appendBoolean(this.item.allowGift());
         this.response.appendBoolean(this.item.allowInventoryStack());
+        this.response.appendInt(this.item.getStateCount());
         this.response.appendString(this.item.getCustomParams());
         return this.response;
     }

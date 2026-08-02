@@ -21,6 +21,7 @@ export const FurniEditorView: FC<{}> = props =>
     const [ allowMarketplace, setAllowMarketplace ] = useState(false);
     const [ allowGift, setAllowGift ] = useState(false);
     const [ allowInventoryStack, setAllowInventoryStack ] = useState(false);
+    const [ interactionModesCount, setInteractionModesCount ] = useState(1);
     const [ customParams, setCustomParams ] = useState('');
 
     const onClose = () => setIsVisible(false);
@@ -42,6 +43,7 @@ export const FurniEditorView: FC<{}> = props =>
             allowMarketplace,
             allowGift,
             allowInventoryStack,
+            interactionModesCount,
             customParams
         }));
     }
@@ -64,6 +66,7 @@ export const FurniEditorView: FC<{}> = props =>
         setAllowMarketplace(parser.allowMarketplace);
         setAllowGift(parser.allowGift);
         setAllowInventoryStack(parser.allowInventoryStack);
+        setInteractionModesCount(parser.interactionModesCount);
         setCustomParams(parser.customParams);
     });
 
@@ -124,6 +127,10 @@ export const FurniEditorView: FC<{}> = props =>
                     <Column gap={ 1 } grow>
                         <Text>{ LocalizeText('furni.editor.stack_height') }</Text>
                         <input type="text" className="form-control form-control-sm" value={ height } onChange={ event => setHeight(event.target.value) } />
+                    </Column>
+                    <Column gap={ 1 } grow>
+                        <Text>{ LocalizeText('furni.editor.interaction_modes_count') }</Text>
+                        <input type="number" className="form-control form-control-sm" value={ interactionModesCount } onChange={ event => setInteractionModesCount(parseInt(event.target.value) || 0) } />
                     </Column>
                 </Flex>
                 <Column gap={ 1 }>

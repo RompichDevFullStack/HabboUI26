@@ -291,6 +291,10 @@ public class Item implements ISerialize {
         this.customParams = customParams;
     }
 
+    public void setStateCount(int stateCount) {
+        this.stateCount = (short) stateCount;
+    }
+
     @Override
     public void serialize(ServerMessage message) {
         message.appendString(this.type.code.toLowerCase());

@@ -35,6 +35,7 @@ public class SaveFurniEditorDataEvent extends MessageHandler {
         boolean allowMarketplace = this.packet.readBoolean();
         boolean allowGift = this.packet.readBoolean();
         boolean allowInventoryStack = this.packet.readBoolean();
+        int stateCount = this.packet.readInt();
         String customParams = this.packet.readString();
 
         Item item = Emulator.getGameEnvironment().getItemManager().getItem(typeId);
@@ -57,10 +58,11 @@ public class SaveFurniEditorDataEvent extends MessageHandler {
         item.setAllowMarketplace(allowMarketplace);
         item.setAllowGift(allowGift);
         item.setAllowInventoryStack(allowInventoryStack);
+        item.setStateCount(stateCount);
         item.setCustomParams(customParams);
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement(
-                "UPDATE items_base SET public_name = ?, width = ?, length = ?, stack_height = ?, allow_stack = ?, allow_walk = ?, allow_sit = ?, allow_lay = ?, allow_recycle = ?, allow_trade = ?, allow_marketplace_sell = ?, allow_gift = ?, allow_inventory_stack = ?, customparams = ? WHERE id = ?")) {
+                "UPDATE items_base SET public_name = ?, width = ?, length = ?, stack_height = ?, allow_stack = ?, allow_walk = ?, allow_sit = ?, allow_lay = ?, allow_recycle = ?, allow_trade = ?, allow_marketplace_sell = ?, allow_gift = ?, allow_inventory_stack = ?, interaction_modes_count = ?, customparams = ? WHERE id = ?")) {
             statement.setString(1, fullName);
             statement.setInt(2, width);
             statement.setInt(3, length);
@@ -74,8 +76,9 @@ public class SaveFurniEditorDataEvent extends MessageHandler {
             statement.setBoolean(11, allowMarketplace);
             statement.setBoolean(12, allowGift);
             statement.setBoolean(13, allowInventoryStack);
-            statement.setString(14, customParams);
-            statement.setInt(15, typeId);
+            statement.setInt(14, stateCount);
+            statement.setString(15, customParams);
+            statement.setInt(16, typeId);
             statement.execute();
         } catch (SQLException e) {
             LOGGER.error("Caught SQL exception", e);

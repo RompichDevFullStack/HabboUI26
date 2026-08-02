@@ -16,6 +16,7 @@ export class FurniEditorDataParser implements IMessageParser
     private _allowMarketplace: boolean;
     private _allowGift: boolean;
     private _allowInventoryStack: boolean;
+    private _interactionModesCount: number;
     private _customParams: string;
 
     public flush(): boolean
@@ -34,6 +35,7 @@ export class FurniEditorDataParser implements IMessageParser
         this._allowMarketplace = false;
         this._allowGift = false;
         this._allowInventoryStack = false;
+        this._interactionModesCount = 0;
         this._customParams = null;
 
         return true;
@@ -57,6 +59,7 @@ export class FurniEditorDataParser implements IMessageParser
         this._allowMarketplace = wrapper.readBoolean();
         this._allowGift = wrapper.readBoolean();
         this._allowInventoryStack = wrapper.readBoolean();
+        this._interactionModesCount = wrapper.readInt();
         this._customParams = wrapper.readString();
 
         return true;
@@ -130,6 +133,11 @@ export class FurniEditorDataParser implements IMessageParser
     public get allowInventoryStack(): boolean
     {
         return this._allowInventoryStack;
+    }
+
+    public get interactionModesCount(): number
+    {
+        return this._interactionModesCount;
     }
 
     public get customParams(): string

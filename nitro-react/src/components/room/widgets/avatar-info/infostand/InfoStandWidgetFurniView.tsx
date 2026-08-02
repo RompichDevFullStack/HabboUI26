@@ -171,29 +171,6 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
             }
         }
 
-        let posX = 0;
-        let posY = 0;
-        let posZ = 0;
-        let posRotation = 0;
-        let posStateIndex = 0;
-
-        if(GetSessionDataManager().rankId >= 7)
-        {
-            const roomObject = GetRoomEngine().getRoomObject(roomSession.roomId, avatarInfo.id, (avatarInfo.isWallItem) ? RoomObjectCategory.WALL : RoomObjectCategory.FLOOR);
-
-            if(roomObject)
-            {
-                const location = roomObject.getLocation();
-                const direction = roomObject.getDirection();
-
-                posX = location.x;
-                posY = location.y;
-                posZ = location.z;
-                posRotation = direction.x;
-                posStateIndex = roomObject.model.getValue<number>(RoomObjectVariable.FURNITURE_AUTOMATIC_STATE_INDEX) || 0;
-            }
-        }
-
         if(avatarInfo.isOwner || avatarInfo.isAnyRoomController) pickupMode = PICKUP_MODE_FULL;
 
         else if(avatarInfo.isRoomOwner || (avatarInfo.roomControllerLevel >= RoomControllerLevel.GUILD_ADMIN)) pickupMode = PICKUP_MODE_EJECT;
@@ -217,13 +194,38 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
         setIsJukeBox(furniIsJukebox);
         setIsSongDisk(furniIsSongDisk);
         setSongId(furniSongId);
-        setPositionX(posX);
-        setPositionY(posY);
-        setPositionZ(posZ);
-        setRotation(posRotation);
-        setStateIndex(posStateIndex);
 
         if(avatarInfo.groupId) SendMessageComposer(new GroupInformationComposer(avatarInfo.groupId, false));
+    }, [ roomSession, avatarInfo ]);
+
+    useEffect(() =>
+    {
+        if(!avatarInfo || (GetSessionDataManager().rankId < 7)) return;
+
+        const updatePosition = () =>
+        {
+            const roomObject = GetRoomEngine().getRoomObject(roomSession.roomId, avatarInfo.id, (avatarInfo.isWallItem) ? RoomObjectCategory.WALL : RoomObjectCategory.FLOOR);
+
+            if(!roomObject) return;
+
+            const location = roomObject.getLocation();
+            const direction = roomObject.getDirection();
+
+            setPositionX(location.x);
+            setPositionY(location.y);
+            setPositionZ(location.z);
+            setRotation(direction.x);
+
+            const state = roomObject.getState(0);
+
+            setStateIndex((state >= 0) ? state : 0);
+        }
+
+        updatePosition();
+
+        const interval = setInterval(updatePosition, 300);
+
+        return () => clearInterval(interval);
     }, [ roomSession, avatarInfo ]);
 
     useMessageEvent<GroupInformationEvent>(GroupInformationEvent, event =>
