@@ -235,6 +235,11 @@ export class OutgoingHeader
     public static USER_BADGES = 2769;
     public static USER_BADGES_CURRENT = 2091;
     public static USER_BADGES_CURRENT_UPDATE = 644;
+    public static USER_BANNERS = 9001;
+    public static USER_BANNERS_CURRENT = 9002;
+    public static USER_BANNERS_CURRENT_UPDATE = 9003;
+    public static FURNI_EDITOR_DATA_REQUEST = 9007;
+    public static FURNI_EDITOR_DATA_SAVE = 9009;
     public static USER_BOTS = 3848;
     public static USER_CURRENCY = 273;
     public static USER_EFFECT_ACTIVATE = 2959;

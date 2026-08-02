@@ -235,6 +235,62 @@ public class Item implements ISerialize {
         return rotations;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setWidth(int width) {
+        this.width = (short) width;
+    }
+
+    public void setLength(int length) {
+        this.length = (short) length;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setAllowStack(boolean allowStack) {
+        this.allowStack = allowStack;
+    }
+
+    public void setAllowWalk(boolean allowWalk) {
+        this.allowWalk = allowWalk;
+    }
+
+    public void setAllowSit(boolean allowSit) {
+        this.allowSit = allowSit;
+    }
+
+    public void setAllowLay(boolean allowLay) {
+        this.allowLay = allowLay;
+    }
+
+    public void setAllowRecyle(boolean allowRecyle) {
+        this.allowRecyle = allowRecyle;
+    }
+
+    public void setAllowTrade(boolean allowTrade) {
+        this.allowTrade = allowTrade;
+    }
+
+    public void setAllowMarketplace(boolean allowMarketplace) {
+        this.allowMarketplace = allowMarketplace;
+    }
+
+    public void setAllowGift(boolean allowGift) {
+        this.allowGift = allowGift;
+    }
+
+    public void setAllowInventoryStack(boolean allowInventoryStack) {
+        this.allowInventoryStack = allowInventoryStack;
+    }
+
+    public void setCustomParams(String customParams) {
+        this.customParams = customParams;
+    }
+
     @Override
     public void serialize(ServerMessage message) {
         message.appendString(this.type.code.toLowerCase());

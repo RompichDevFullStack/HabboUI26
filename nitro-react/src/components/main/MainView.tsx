@@ -11,6 +11,7 @@ import { CatalogView } from '../catalog/CatalogView';
 import { ChatHistoryView } from '../chat-history/ChatHistoryView';
 import { FloorplanEditorView } from '../floorplan-editor/FloorplanEditorView';
 import { FriendsView } from '../friends/FriendsView';
+import { FurniEditorView } from '../furni-editor/FurniEditorView';
 import { GameCenterView } from '../game-center/GameCenterView';
 import { GroupsView } from '../groups/GroupsView';
 import { GuideToolView } from '../guide-tool/GuideToolView';
@@ -109,6 +110,7 @@ export const MainView: FC<{}> = props =>
             <CampaignView />
             <GameCenterView />
             <FloorplanEditorView />
+            <FurniEditorView />
         </Base>
     );
 }

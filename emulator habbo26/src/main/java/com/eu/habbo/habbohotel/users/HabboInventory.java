@@ -18,6 +18,7 @@ public class HabboInventory {
     private final Habbo habbo;
     private WardrobeComponent wardrobeComponent;
     private BadgesComponent badgesComponent;
+    private BannersComponent bannersComponent;
     private BotsComponent botsComponent;
     private EffectsComponent effectsComponent;
     private ItemsComponent itemsComponent;
@@ -27,6 +28,12 @@ public class HabboInventory {
         this.habbo = habbo;
         try {
             this.badgesComponent = new BadgesComponent(this.habbo);
+        } catch (Exception e) {
+            LOGGER.error("Caught exception", e);
+        }
+
+        try {
+            this.bannersComponent = new BannersComponent(this.habbo);
         } catch (Exception e) {
             LOGGER.error("Caught exception", e);
         }
@@ -80,6 +87,14 @@ public class HabboInventory {
         this.badgesComponent = badgesComponent;
     }
 
+    public BannersComponent getBannersComponent() {
+        return this.bannersComponent;
+    }
+
+    public void setBannersComponent(BannersComponent bannersComponent) {
+        this.bannersComponent = bannersComponent;
+    }
+
     public BotsComponent getBotsComponent() {
         return this.botsComponent;
     }
@@ -114,6 +129,7 @@ public class HabboInventory {
 
     public void dispose() {
         this.badgesComponent.dispose();
+        this.bannersComponent.dispose();
         this.botsComponent.dispose();
         this.effectsComponent.dispose();
         this.itemsComponent.dispose();
@@ -121,6 +137,7 @@ public class HabboInventory {
         this.wardrobeComponent.dispose();
 
         this.badgesComponent = null;
+        this.bannersComponent = null;
         this.botsComponent = null;
         this.effectsComponent = null;
         this.itemsComponent = null;

@@ -2,6 +2,7 @@ export * from './CfhChatlogData';
 export * from './CfhChatlogMessageParser';
 export * from './ChatlineData';
 export * from './ChatRecordData';
+export * from './FurniEditorDataParser';
 export * from './INamed';
 export * from './IssueDeletedMessageParser';
 export * from './IssueInfoMessageParser';

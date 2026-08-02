@@ -1,4 +1,5 @@
 export * from './CfhChatlogEvent';
+export * from './FurniEditorDataEvent';
 export * from './IssueDeletedMessageEvent';
 export * from './IssueInfoMessageEvent';
 export * from './IssuePickFailedMessageEvent';

@@ -1,5 +1,6 @@
 export * from './RelationshipStatusInfoEvent';
 export * from './UserCurrentBadgesEvent';
+export * from './UserCurrentBannerEvent';
 export * from './UserInfoEvent';
 export * from './UserNameChangeMessageEvent';
 export * from './UserProfileEvent';

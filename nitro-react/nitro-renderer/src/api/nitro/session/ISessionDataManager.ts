@@ -46,6 +46,7 @@ export interface ISessionDataManager extends INitroManager
     clubLevel: number;
     securityLevel: number;
     isAmbassador: boolean;
+    rankId: number;
     isNoob: boolean;
     isRealNoob: boolean;
     isSystemOpen: boolean;

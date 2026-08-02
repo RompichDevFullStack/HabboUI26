@@ -1,6 +1,7 @@
 export * from './RelationshipStatusInfo';
 export * from './RelationshipStatusInfoMessageParser';
 export * from './UserCurrentBadgesParser';
+export * from './UserCurrentBannerParser';
 export * from './UserFigureParser';
 export * from './UserInfoDataParser';
 export * from './UserInfoParser';

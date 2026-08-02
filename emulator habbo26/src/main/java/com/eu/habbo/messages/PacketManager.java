@@ -34,6 +34,7 @@ import com.eu.habbo.messages.incoming.helper.MySanctionStatusEvent;
 import com.eu.habbo.messages.incoming.helper.RequestTalentTrackEvent;
 import com.eu.habbo.messages.incoming.hotelview.*;
 import com.eu.habbo.messages.incoming.inventory.RequestInventoryBadgesEvent;
+import com.eu.habbo.messages.incoming.inventory.RequestInventoryBannersEvent;
 import com.eu.habbo.messages.incoming.inventory.RequestInventoryBotsEvent;
 import com.eu.habbo.messages.incoming.inventory.RequestInventoryItemsEvent;
 import com.eu.habbo.messages.incoming.inventory.RequestInventoryPetsEvent;
@@ -307,6 +308,8 @@ public class PacketManager {
         this.registerHandler(Incoming.UserSaveLookEvent, UserSaveLookEvent.class);
         this.registerHandler(Incoming.UserWearBadgeEvent, UserWearBadgeEvent.class);
         this.registerHandler(Incoming.RequestWearingBadgesEvent, RequestWearingBadgesEvent.class);
+        this.registerHandler(Incoming.UserWearBannerEvent, UserWearBannerEvent.class);
+        this.registerHandler(Incoming.RequestWearingBannerEvent, RequestWearingBannerEvent.class);
         this.registerHandler(Incoming.SaveUserVolumesEvent, SaveUserVolumesEvent.class);
         this.registerHandler(Incoming.SaveBlockCameraFollowEvent, SaveBlockCameraFollowEvent.class);
         this.registerHandler(Incoming.SaveIgnoreRoomInvitesEvent, SaveIgnoreRoomInvitesEvent.class);
@@ -365,6 +368,7 @@ public class PacketManager {
 
     private void registerInventory() throws Exception {
         this.registerHandler(Incoming.RequestInventoryBadgesEvent, RequestInventoryBadgesEvent.class);
+        this.registerHandler(Incoming.RequestInventoryBannersEvent, RequestInventoryBannersEvent.class);
         this.registerHandler(Incoming.RequestInventoryBotsEvent, RequestInventoryBotsEvent.class);
         this.registerHandler(Incoming.RequestInventoryItemsEvent, RequestInventoryItemsEvent.class);
         this.registerHandler(Incoming.HotelViewInventoryEvent, RequestInventoryItemsEvent.class);
@@ -472,6 +476,8 @@ public class PacketManager {
     }
 
     void registerModTool() throws Exception {
+        this.registerHandler(Incoming.RequestFurniEditorDataEvent, RequestFurniEditorDataEvent.class);
+        this.registerHandler(Incoming.SaveFurniEditorDataEvent, SaveFurniEditorDataEvent.class);
         this.registerHandler(Incoming.ModToolRequestRoomInfoEvent, ModToolRequestRoomInfoEvent.class);
         this.registerHandler(Incoming.ModToolRequestRoomChatlogEvent, ModToolRequestRoomChatlogEvent.class);
         this.registerHandler(Incoming.ModToolRequestUserInfoEvent, ModToolRequestUserInfoEvent.class);

@@ -280,6 +280,15 @@
     }
 }
 
+.banner-image {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
 .furni-image {
     position: relative;
     width: 100%;

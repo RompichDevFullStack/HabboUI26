@@ -19,3 +19,5 @@ export * from './ModToolSanctionComposer';
 export * from './ModTradingLockMessageComposer';
 export * from './PickIssuesMessageComposer';
 export * from './ReleaseIssuesMessageComposer';
+export * from './RequestFurniEditorDataComposer';
+export * from './SaveFurniEditorDataComposer';

@@ -1,6 +1,6 @@
 import { FC, MouseEvent, useEffect, useState } from 'react';
 import { Overlay, Popover } from 'react-bootstrap';
-import { Base, Flex, Grid, NitroCardContentView } from '../../../../common';
+import { Base, Column, Flex, NitroCardContentView, Text } from '../../../../common';
 
 interface ChatInputStyleSelectorViewProps
 {
@@ -48,21 +48,30 @@ export const ChatInputStyleSelectorView: FC<ChatInputStyleSelectorViewProps> = p
                 <Base className="chat-style-arrow" />
                 <Base className="icon chatstyles-icon" />
             </Flex>
-            <Overlay show={ selectorVisible } target={ target } placement="top">
+            <Overlay show={ selectorVisible } target={ target } placement="top" popperConfig={ { modifiers: [ { name: 'offset', options: { offset: [ 0, 12 ] } } ] } }>
                 <Popover className="nitro-chat-style-selector-container image-rendering-pixelated">
-                    <NitroCardContentView overflow="hidden" className="bg-transparent">
-                        <Grid columnCount={ 3 } overflow="auto">
+                    <Flex alignItems="center" className="chat-style-selector-header">
+                        <Text bold small variant="white" className="chat-style-selector-title">Styles de chat</Text>
+                    </Flex>
+                    <NitroCardContentView overflow="auto" className="bg-transparent">
+                        <Column gap={ 2 }>
                             { chatStyleIds && (chatStyleIds.length > 0) && chatStyleIds.map((styleId) =>
                             {
                                 return (
-                                    <Flex center pointer key={ styleId } className="bubble-parent-container" onClick={ event => selectStyle(styleId) }>
-                                        <Base key={ styleId } className="bubble-container">
-                                            <Base className={ `chat-bubble bubble-${ styleId }` }>&nbsp;</Base>
-                                        </Base>
+                                    <Flex pointer key={ styleId } className={ `chat-style-row ${ (styleId === chatStyleId) ? 'selected' : '' }` } onClick={ () => selectStyle(styleId) }>
+                                        <div className="bubble-container visible">
+                                            { (styleId === 0) &&
+                                                <div className="user-container-bg" /> }
+                                            <div className={ `chat-bubble bubble-${ styleId } type-0` }>
+                                                <div className="user-container" />
+                                                <div className="chat-content">Bonjour, comment ça va aujourd'hui ?</div>
+                                                <div className="pointer" />
+                                            </div>
+                                        </div>
                                     </Flex>
                                 );
                             }) }
-                        </Grid>
+                        </Column>
                     </NitroCardContentView>
                 </Popover>
             </Overlay>

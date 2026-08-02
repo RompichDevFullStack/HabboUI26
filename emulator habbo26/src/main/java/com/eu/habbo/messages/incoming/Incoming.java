@@ -15,6 +15,11 @@ public class Incoming {
     public static final int MannequinSaveLookEvent = 2209;
     public static final int RequestCatalogPageEvent = 412;
     public static final int RequestWearingBadgesEvent = 2091;
+    public static final int RequestWearingBannerEvent = 9002;
+    public static final int UserWearBannerEvent = 9003;
+    public static final int RequestInventoryBannersEvent = 9001;
+    public static final int RequestFurniEditorDataEvent = 9007;
+    public static final int SaveFurniEditorDataEvent = 9009;
     public static final int BotPickupEvent = 3323;
     public static final int HorseRideEvent = 1036;
     public static final int RequestCreateRoomEvent = 2752;

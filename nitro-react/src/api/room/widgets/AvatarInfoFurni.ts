@@ -6,6 +6,7 @@ export class AvatarInfoFurni implements IAvatarInfo
     public static FURNI: string = 'IFI_FURNI';
 
     public id: number = 0;
+    public typeId: number = 0;
     public category: number = 0;
     public name: string = '';
     public description: string = '';

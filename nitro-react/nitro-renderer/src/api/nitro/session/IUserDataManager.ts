@@ -15,6 +15,8 @@ export interface IUserDataManager
     removeUserData(roomIndex: number): void;
     getUserBadges(userId: number): string[];
     setUserBadges(userId: number, badges: string[]): void;
+    getUserBanner(userId: number): string;
+    setUserBanner(userId: number, bannerCode: string): void;
     updateFigure(roomIndex: number, figure: string, sex: string, hasSaddle: boolean, isRiding: boolean): void;
     updateName(roomIndex: number, name: string): void;
     updateMotto(roomIndex: number, custom: string): void;

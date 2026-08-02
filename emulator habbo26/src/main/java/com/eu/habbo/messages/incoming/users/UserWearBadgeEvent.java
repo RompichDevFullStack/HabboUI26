@@ -15,9 +15,9 @@ public class UserWearBadgeEvent extends MessageHandler {
 
         ArrayList<HabboBadge> updatedBadges = new ArrayList<>();
         ArrayList<Integer> usedSlots = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 7; i++) {
             int slot = this.packet.readInt();
-            if (slot < 1 || slot > 5)
+            if (slot < 1 || slot > 7)
                 return;
 
             String badgeId = this.packet.readString();

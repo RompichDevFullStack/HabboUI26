@@ -122,6 +122,7 @@ export class AvatarInfoUtilities
 
             if(furnitureData)
             {
+                furniInfo.typeId = furnitureData.id;
                 furniInfo.name = furnitureData.name;
                 furniInfo.description = furnitureData.description;
                 furniInfo.purchaseOfferId = furnitureData.purchaseOfferId;
@@ -258,6 +259,7 @@ export class AvatarInfoUtilities
         userInfo.groupBadgeId = GetSessionDataManager().getGroupBadge(userInfo.groupId);
         userInfo.groupName = userData.groupName;
         userInfo.badges = roomSession.userDataManager.getUserBadges(userData.webID);
+        userInfo.bannerCode = roomSession.userDataManager.getUserBanner(userData.webID);
         userInfo.figure = userData.figure;
         //var _local_8:Array = GetSessionDataManager().getUserTags(userData.webID);
         //this._Str_16287(userData.webId, _local_8);

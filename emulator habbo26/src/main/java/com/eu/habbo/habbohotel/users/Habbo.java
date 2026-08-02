@@ -8,6 +8,7 @@ import com.eu.habbo.habbohotel.messenger.Messenger;
 import com.eu.habbo.habbohotel.pets.Pet;
 import com.eu.habbo.habbohotel.rooms.*;
 import com.eu.habbo.habbohotel.users.inventory.BadgesComponent;
+import com.eu.habbo.habbohotel.users.inventory.BannersComponent;
 import com.eu.habbo.messages.outgoing.generic.alerts.*;
 import com.eu.habbo.messages.outgoing.inventory.*;
 import com.eu.habbo.messages.outgoing.rooms.FloodCounterComposer;
@@ -405,6 +406,19 @@ public class Habbo implements Runnable {
             BadgesComponent.deleteBadge(this.getHabboInfo().getId(), badge.getCode());
             this.client.sendResponse(new InventoryBadgesComposer(this));
         }
+    }
+
+
+    public boolean addBanner(String code) {
+        if (!this.habboInventory.getBannersComponent().hasBanner(code)) {
+            HabboBanner banner = BannersComponent.createBanner(code, this);
+            this.habboInventory.getBannersComponent().addBanner(banner);
+            this.client.sendResponse(new AddUserBannerComposer(banner));
+
+            return true;
+        }
+
+        return false;
     }
 
     public void mute(int seconds, boolean isFlood) {

@@ -18,6 +18,7 @@ export class AvatarInfoUser implements IAvatarInfo
     public userType: number = -1;
     public figure: string = '';
     public badges: string[] = [];
+    public bannerCode: string = null;
     public groupId: number = 0;
     public groupName: string = '';
     public groupBadgeId: string = '';

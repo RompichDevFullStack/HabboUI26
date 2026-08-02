@@ -4,6 +4,7 @@ import { AddEventLinkTracker, GetLocalization, GetRoomEngine, isObjectMoverReque
 import { NitroCardContentView, NitroCardHeaderView, NitroCardTabsItemView, NitroCardTabsView, NitroCardView } from '../../common';
 import { useInventoryTrade, useInventoryUnseenTracker, useMessageEvent, useRoomEngineEvent, useRoomSessionManagerEvent } from '../../hooks';
 import { InventoryBadgeView } from './views/badge/InventoryBadgeView';
+import { InventoryBannerView } from './views/banner/InventoryBannerView';
 import { InventoryBotView } from './views/bot/InventoryBotView';
 import { InventoryFurnitureView } from './views/furniture/InventoryFurnitureView';
 import { InventoryTradeView } from './views/furniture/InventoryTradeView';
@@ -13,7 +14,8 @@ const TAB_FURNITURE: string = 'inventory.furni';
 const TAB_BOTS: string = 'inventory.bots';
 const TAB_PETS: string = 'inventory.furni.tab.pets';
 const TAB_BADGES: string = 'inventory.badges';
-const TABS = [ TAB_FURNITURE, TAB_BOTS, TAB_PETS, TAB_BADGES ];
+const TAB_BANNERS: string = 'inventory.banners';
+const TABS = [ TAB_FURNITURE, TAB_BOTS, TAB_PETS, TAB_BADGES, TAB_BANNERS ];
 const UNSEEN_CATEGORIES = [ UnseenItemCategory.FURNI, UnseenItemCategory.BOT, UnseenItemCategory.PET, UnseenItemCategory.BADGE ];
 
 export const InventoryView: FC<{}> = props =>
@@ -139,8 +141,10 @@ export const InventoryView: FC<{}> = props =>
                             <InventoryBotView roomSession={ roomSession } roomPreviewer={ roomPreviewer } /> }
                         { (currentTab === TAB_PETS ) && 
                             <InventoryPetView roomSession={ roomSession } roomPreviewer={ roomPreviewer } /> }
-                        { (currentTab === TAB_BADGES ) && 
+                        { (currentTab === TAB_BADGES ) &&
                             <InventoryBadgeView /> }
+                        { (currentTab === TAB_BANNERS ) &&
+                            <InventoryBannerView /> }
                     </NitroCardContentView>
                 </> }
             { isTrading &&

@@ -1,6 +1,6 @@
 import { IConnection, IRoomUserData } from '../../api';
 import { Disposable } from '../../core';
-import { RequestPetInfoComposer, UserCurrentBadgesComposer } from '../communication';
+import { RequestPetInfoComposer, UserCurrentBadgesComposer, UserCurrentBannerComposer } from '../communication';
 
 export class UserDataManager extends Disposable
 {
@@ -14,6 +14,7 @@ export class UserDataManager extends Disposable
     private _userDataByType: Map<number, Map<number, IRoomUserData>>;
     private _userDataByRoomIndex: Map<number, IRoomUserData>;
     private _userBadges: Map<number, string[]>;
+    private _userBanners: Map<number, string>;
 
     constructor()
     {
@@ -24,6 +25,7 @@ export class UserDataManager extends Disposable
         this._userDataByType = new Map();
         this._userDataByRoomIndex = new Map();
         this._userBadges = new Map();
+        this._userBanners = new Map();
     }
 
     protected onDispose(): void
@@ -140,6 +142,21 @@ export class UserDataManager extends Disposable
     public setUserBadges(userId: number, badges: string[]): void
     {
         this._userBadges.set(userId, badges);
+    }
+
+    public getUserBanner(userId: number): string
+    {
+        if(this._connection)
+        {
+            this._connection.send(new UserCurrentBannerComposer(userId));
+        }
+
+        return (this._userBanners.get(userId) ?? null);
+    }
+
+    public setUserBanner(userId: number, bannerCode: string): void
+    {
+        this._userBanners.set(userId, bannerCode);
     }
 
     public updateFigure(roomIndex: number, figure: string, sex: string, hasSaddle: boolean, isRiding: boolean): void

@@ -1,5 +1,6 @@
 export * from './avatareffect';
 export * from './badges';
+export * from './banners';
 export * from './bots';
 export * from './furni';
 export * from './pets';

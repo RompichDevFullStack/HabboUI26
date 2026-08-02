@@ -5,12 +5,14 @@ export class UserPermissionsParser implements IMessageParser
     private _clubLevel: number;
     private _securityLevel: number;
     private _isAmbassador: boolean;
+    private _rankId: number;
 
     public flush(): boolean
     {
         this._clubLevel = 0;
         this._securityLevel = 0;
         this._isAmbassador = false;
+        this._rankId = 0;
 
         return true;
     }
@@ -22,6 +24,7 @@ export class UserPermissionsParser implements IMessageParser
         this._clubLevel = wrapper.readInt();
         this._securityLevel = wrapper.readInt();
         this._isAmbassador = wrapper.readBoolean();
+        this._rankId = wrapper.readInt();
 
         return true;
     }
@@ -39,5 +42,10 @@ export class UserPermissionsParser implements IMessageParser
     public get isAmbassador(): boolean
     {
         return this._isAmbassador;
+    }
+
+    public get rankId(): number
+    {
+        return this._rankId;
     }
 }

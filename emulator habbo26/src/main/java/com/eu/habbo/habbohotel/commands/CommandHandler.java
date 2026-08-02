@@ -180,6 +180,7 @@ public class CommandHandler {
         addCommand(new AllowTradingCommand());
         addCommand(new ArcturusCommand());
         addCommand(new BadgeCommand());
+        addCommand(new BannerCommand());
         addCommand(new BanCommand());
         addCommand(new BlockAlertCommand());
         addCommand(new BotsCommand());

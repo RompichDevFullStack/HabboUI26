@@ -21,6 +21,7 @@ export * from './handshake';
 export * from './help';
 export * from './inventory';
 export * from './inventory/badges';
+export * from './inventory/banners';
 export * from './inventory/bots';
 export * from './inventory/furni';
 export * from './inventory/pets';

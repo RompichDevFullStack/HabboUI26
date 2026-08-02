@@ -32,6 +32,7 @@ export class SessionDataManager extends NitroManager implements ISessionDataMana
     private _clubLevel: number;
     private _securityLevel: number;
     private _isAmbassador: boolean;
+    private _rankId: number;
     private _noobnessLevel: number;
     private _isEmailVerified: boolean;
 
@@ -70,6 +71,7 @@ export class SessionDataManager extends NitroManager implements ISessionDataMana
         this._clubLevel = 0;
         this._securityLevel = 0;
         this._isAmbassador = false;
+        this._rankId = 0;
         this._noobnessLevel = -1;
         this._isEmailVerified = false;
 
@@ -278,6 +280,7 @@ export class SessionDataManager extends NitroManager implements ISessionDataMana
         this._clubLevel = event.getParser().clubLevel;
         this._securityLevel = event.getParser().securityLevel;
         this._isAmbassador = event.getParser().isAmbassador;
+        this._rankId = event.getParser().rankId;
     }
 
     private onAvailabilityStatusMessageEvent(event: AvailabilityStatusMessageEvent): void
@@ -675,6 +678,11 @@ export class SessionDataManager extends NitroManager implements ISessionDataMana
     public get isAmbassador(): boolean
     {
         return this._isAmbassador;
+    }
+
+    public get rankId(): number
+    {
+        return this._rankId;
     }
 
     public get isEmailVerified(): boolean

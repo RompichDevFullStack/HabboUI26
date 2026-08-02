@@ -1,7 +1,7 @@
 import { CrackableDataType, GroupInformationComposer, GroupInformationEvent, NowPlayingEvent, RoomControllerLevel, RoomObjectCategory, RoomObjectOperationType, RoomObjectVariable, RoomWidgetEnumItemExtradataParameter, RoomWidgetFurniInfoUsagePolicyEnum, SetObjectDataMessageComposer, SongInfoReceivedEvent, StringDataType } from '@nitrots/nitro-renderer';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { AvatarInfoFurni, CreateLinkEvent, GetGroupInformation, GetNitroInstance, GetRoomEngine, LocalizeText, SendMessageComposer } from '../../../../../api';
+import { AvatarInfoFurni, CreateLinkEvent, GetGroupInformation, GetNitroInstance, GetRoomEngine, GetSessionDataManager, LocalizeText, SendMessageComposer } from '../../../../../api';
 import { Base, Button, Column, Flex, LayoutBadgeImageView, LayoutLimitedEditionCompactPlateView, LayoutRarityLevelView, Text, UserProfileIconView } from '../../../../../common';
 import { useMessageEvent, useRoom, useSoundEvent } from '../../../../../hooks';
 
@@ -39,6 +39,11 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
     const [ songId, setSongId ] = useState<number>(-1);
     const [ songName, setSongName ] = useState<string>('');
     const [ songCreator, setSongCreator ] = useState<string>('');
+    const [ positionX, setPositionX ] = useState(0);
+    const [ positionY, setPositionY ] = useState(0);
+    const [ positionZ, setPositionZ ] = useState(0);
+    const [ rotation, setRotation ] = useState(0);
+    const [ stateIndex, setStateIndex ] = useState(0);
 
     useSoundEvent<NowPlayingEvent>(NowPlayingEvent.NPE_SONG_CHANGED, event =>
     {
@@ -166,6 +171,29 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
             }
         }
 
+        let posX = 0;
+        let posY = 0;
+        let posZ = 0;
+        let posRotation = 0;
+        let posStateIndex = 0;
+
+        if(GetSessionDataManager().rankId >= 7)
+        {
+            const roomObject = GetRoomEngine().getRoomObject(roomSession.roomId, avatarInfo.id, (avatarInfo.isWallItem) ? RoomObjectCategory.WALL : RoomObjectCategory.FLOOR);
+
+            if(roomObject)
+            {
+                const location = roomObject.getLocation();
+                const direction = roomObject.getDirection();
+
+                posX = location.x;
+                posY = location.y;
+                posZ = location.z;
+                posRotation = direction.x;
+                posStateIndex = roomObject.model.getValue<number>(RoomObjectVariable.FURNITURE_AUTOMATIC_STATE_INDEX) || 0;
+            }
+        }
+
         if(avatarInfo.isOwner || avatarInfo.isAnyRoomController) pickupMode = PICKUP_MODE_FULL;
 
         else if(avatarInfo.isRoomOwner || (avatarInfo.roomControllerLevel >= RoomControllerLevel.GUILD_ADMIN)) pickupMode = PICKUP_MODE_EJECT;
@@ -189,7 +217,12 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
         setIsJukeBox(furniIsJukebox);
         setIsSongDisk(furniIsSongDisk);
         setSongId(furniSongId);
-        
+        setPositionX(posX);
+        setPositionY(posY);
+        setPositionZ(posZ);
+        setRotation(posRotation);
+        setStateIndex(posStateIndex);
+
         if(avatarInfo.groupId) SendMessageComposer(new GroupInformationComposer(avatarInfo.groupId, false));
     }, [ roomSession, avatarInfo ]);
 
@@ -281,6 +314,9 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
             case 'use':
                 GetRoomEngine().useRoomObject(avatarInfo.id, avatarInfo.category);
                 break;
+            case 'furni_editor':
+                CreateLinkEvent(`furni-editor/open/${ avatarInfo.typeId }`);
+                break;
             case 'save_branding_configuration': {
                 const mapData = new Map<string, string>();
                 const dataParts = getFurniSettingsAsString().split('\t');
@@ -369,6 +405,46 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
                                     { LocalizeText('infostand.button.buy') }
                                 </Text>
                             </Flex> }
+                        { (GetSessionDataManager().rankId >= 7) &&
+                            <>
+                                <Flex>
+                                    <Text variant="white" small underline pointer onClick={ event => processButtonAction('furni_editor') }>
+                                        { LocalizeText('furni.editor.title') }
+                                    </Text>
+                                </Flex>
+                                <Column gap={ 1 } className="furni-info-grid">
+                                    <Flex alignItems="center" justifyContent="between">
+                                        <Flex alignItems="center" gap={ 1 }>
+                                            <Base className="furni-info-icon icon-x" />
+                                            <Text variant="white" small>: { positionX }</Text>
+                                        </Flex>
+                                        <Flex alignItems="center" gap={ 1 }>
+                                            <Text variant="white" small>{ rotation }:</Text>
+                                            <Base className="furni-info-icon icon-r" />
+                                        </Flex>
+                                    </Flex>
+                                    <Flex alignItems="center" justifyContent="between">
+                                        <Flex alignItems="center" gap={ 1 }>
+                                            <Base className="furni-info-icon icon-y" />
+                                            <Text variant="white" small>: { positionY }</Text>
+                                        </Flex>
+                                        <Flex alignItems="center" gap={ 1 }>
+                                            <Text variant="white" small>{ stateIndex }:</Text>
+                                            <Base className="furni-info-icon icon-s" />
+                                        </Flex>
+                                    </Flex>
+                                    <Flex alignItems="center" justifyContent="between">
+                                        <Flex alignItems="center" gap={ 1 }>
+                                            <Base className="furni-info-icon icon-z" />
+                                            <Text variant="white" small>: { positionZ }</Text>
+                                        </Flex>
+                                        <Flex alignItems="center" gap={ 1 }>
+                                            <Text variant="white" small>{ avatarInfo.id }</Text>
+                                            <Base className="furni-info-icon icon-id" />
+                                        </Flex>
+                                    </Flex>
+                                </Column>
+                            </> }
                     </Column>
                     { (isJukeBox || isSongDisk) &&
                         <Column gap={ 1 }>

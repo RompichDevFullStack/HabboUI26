@@ -1,8 +1,8 @@
-import { RelationshipStatusInfoEvent, RelationshipStatusInfoMessageParser, RoomSessionFavoriteGroupUpdateEvent, RoomSessionUserBadgesEvent, RoomSessionUserFigureUpdateEvent, UserRelationshipsComposer } from '@nitrots/nitro-renderer';
+import { RelationshipStatusInfoEvent, RelationshipStatusInfoMessageParser, RoomSessionFavoriteGroupUpdateEvent, RoomSessionUserBadgesEvent, RoomSessionUserBannerEvent, RoomSessionUserFigureUpdateEvent, UserRelationshipsComposer } from '@nitrots/nitro-renderer';
 import { Dispatch, FC, FocusEvent, KeyboardEvent, SetStateAction, useEffect, useState } from 'react';
 import { FaPencilAlt, FaTimes } from 'react-icons/fa';
 import { AvatarInfoUser, CloneObject, GetConfiguration, GetGroupInformation, GetSessionDataManager, GetUserProfile, LocalizeText, SendMessageComposer } from '../../../../../api';
-import { Column, Flex, LayoutAvatarImageView, LayoutBadgeImageView, Text, UserProfileIconView } from '../../../../../common';
+import { Column, Flex, LayoutAvatarImageView, LayoutBadgeImageView, LayoutBannerImageView, Text, UserProfileIconView } from '../../../../../common';
 import { useMessageEvent, useRoom, useRoomSessionManagerEvent } from '../../../../../hooks';
 import { InfoStandWidgetUserRelationshipsView } from './InfoStandWidgetUserRelationshipsView';
 import { InfoStandWidgetUserTagsView } from './InfoStandWidgetUserTagsView';
@@ -58,6 +58,22 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
             const newValue = CloneObject(prevValue);
 
             newValue.badges = event.badges;
+
+            return newValue;
+        });
+    });
+
+    useRoomSessionManagerEvent<RoomSessionUserBannerEvent>(RoomSessionUserBannerEvent.RSUBE_BANNER, event =>
+    {
+        if(!avatarInfo || (avatarInfo.webID !== event.userId)) return;
+
+        if(avatarInfo.bannerCode === event.bannerCode) return;
+
+        setAvatarInfo(prevValue =>
+        {
+            const newValue = CloneObject(prevValue);
+
+            newValue.bannerCode = event.bannerCode;
 
             return newValue;
         });
@@ -138,6 +154,8 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                 <Column gap={ 1 }>
                     <Flex gap={ 1 }>
                         <Column fullWidth className="body-image" onClick={ event => GetUserProfile(avatarInfo.webID) }>
+                            { avatarInfo.bannerCode &&
+                                <LayoutBannerImageView bannerCode={ avatarInfo.bannerCode } className="body-banner-image" /> }
                             <LayoutAvatarImageView figure={ avatarInfo.figure } direction={ 4 } />
                         </Column>
                         <Column grow alignItems="center" gap={ 0 }>
@@ -164,6 +182,14 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                                 </Flex>
                                 <Flex center className="badge-image">
                                     { avatarInfo.badges[4] && <LayoutBadgeImageView badgeCode={ avatarInfo.badges[4] } showInfo={ true } /> }
+                                </Flex>
+                            </Flex>
+                            <Flex center gap={ 1 }>
+                                <Flex center className="badge-image">
+                                    { avatarInfo.badges[5] && <LayoutBadgeImageView badgeCode={ avatarInfo.badges[5] } showInfo={ true } /> }
+                                </Flex>
+                                <Flex center className="badge-image">
+                                    { avatarInfo.badges[6] && <LayoutBadgeImageView badgeCode={ avatarInfo.badges[6] } showInfo={ true } /> }
                                 </Flex>
                             </Flex>
                         </Column>
