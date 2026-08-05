@@ -178,10 +178,16 @@ public class RoomUnit {
             RoomTile next = this.path.poll();
             boolean overrideChecks = next != null && this.canOverrideTile(next);
 
+            if (next != null && next.hasUnits() && !overrideChecks) {
+                for (RoomUnit otherUnit : next.getUnits()) {
+                    WiredHandler.handle(WiredTriggerType.AVATAR_COLLISION, this, room, new Object[]{ otherUnit });
+                }
+            }
+
             if (this.path.isEmpty()) {
                 this.sitUpdate = true;
 
-                if (next != null && next.hasUnits() && !overrideChecks) {
+                if (next != null && next.hasUnits() && !overrideChecks && !room.isAllowWalkthrough()) {
                     return false;
                 }
             }

@@ -229,6 +229,7 @@ export class IncomingHeader
     public static USER_BANNERS_CURRENT = 9006;
     public static FURNI_EDITOR_DATA = 9008;
     public static CATALOG_ITEM_NAME = 9013;
+    public static OPEN_DIRECTIONAL_ARROWS = 9014;
     public static USER_BOT_REMOVE = 233;
     public static USER_BOTS = 3086;
     public static USER_CHANGE_NAME = 118;

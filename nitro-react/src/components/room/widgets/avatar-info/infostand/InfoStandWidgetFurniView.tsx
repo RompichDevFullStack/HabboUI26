@@ -219,7 +219,7 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
 
     useEffect(() =>
     {
-        if(!avatarInfo || (GetSessionDataManager().rankId < 7)) return;
+        if(!avatarInfo) return;
 
         const updatePosition = () =>
         {
@@ -422,8 +422,7 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
                                     { LocalizeText('infostand.button.buy') }
                                 </Text>
                             </Flex> }
-                        { (GetSessionDataManager().rankId >= 7) &&
-                            <>
+                        <>
                                 <Flex>
                                     <Text variant="white" small underline pointer onClick={ event => processButtonAction('furni_editor') }>
                                         { LocalizeText('furni.editor.title') }
@@ -461,7 +460,7 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
                                         </Flex>
                                     </Flex>
                                 </Column>
-                            </> }
+                            </>
                     </Column>
                     { (isJukeBox || isSongDisk) &&
                         <Column gap={ 1 }>

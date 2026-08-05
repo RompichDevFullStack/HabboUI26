@@ -23,6 +23,7 @@ public class Incoming {
     public static final int RenameCatalogPageEvent = 9010;
     public static final int RenameCatalogItemEvent = 9011;
     public static final int RequestCatalogItemNameEvent = 9012;
+    public static final int DirectionalArrowClickEvent = 9014;
     public static final int BotPickupEvent = 3323;
     public static final int HorseRideEvent = 1036;
     public static final int RequestCreateRoomEvent = 2752;

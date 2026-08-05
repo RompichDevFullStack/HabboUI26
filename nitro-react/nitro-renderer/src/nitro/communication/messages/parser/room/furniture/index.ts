@@ -11,6 +11,7 @@ export * from './LoveLockFurniFinishedParser';
 export * from './LoveLockFurniFriendConfirmedParser';
 export * from './LoveLockFurniStartParser';
 export * from './OneWayDoorStatusMessageParser';
+export * from './OpenDirectionalArrowsParser';
 export * from './RentableSpaceRentFailedMessageParser';
 export * from './RentableSpaceRentOkMessageParser';
 export * from './RentableSpaceStatusMessageParser';

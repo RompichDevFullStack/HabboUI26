@@ -1,4 +1,6 @@
 import { WiredTriggerLayout } from '../../../../api';
+import { WiredTriggerAvatarClicksArrowView } from './WiredTriggerAvatarClicksArrowView';
+import { WiredTriggerAvatarCollisionView } from './WiredTriggerAvatarCollisionView';
 import { WiredTriggerAvatarEnterRoomView } from './WiredTriggerAvatarEnterRoomView';
 import { WiredTriggerAvatarReceivesHandItemView } from './WiredTriggerAvatarReceivesHandItemView';
 import { WiredTriggerAvatarSaysSomethingView } from './WiredTriggerAvatarSaysSomethingView';
@@ -19,6 +21,10 @@ export const WiredTriggerLayoutView = (code: number) =>
 {
     switch(code)
     {
+        case WiredTriggerLayout.AVATAR_CLICKS_ARROW:
+            return <WiredTriggerAvatarClicksArrowView />;
+        case WiredTriggerLayout.AVATAR_COLLISION:
+            return <WiredTriggerAvatarCollisionView />;
         case WiredTriggerLayout.AVATAR_ENTERS_ROOM:
             return <WiredTriggerAvatarEnterRoomView />;
         case WiredTriggerLayout.AVATAR_RECEIVES_HANDITEM:

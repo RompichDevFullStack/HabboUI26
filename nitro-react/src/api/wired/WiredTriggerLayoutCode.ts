@@ -15,4 +15,6 @@ export class WiredTriggerLayout
     public static EXECUTE_PERIODICALLY_LONG: number = 12;
     public static BOT_REACHED_STUFF: number = 13;
     public static BOT_REACHED_AVATAR: number = 14;
+    public static AVATAR_COLLISION: number = 15;
+    public static AVATAR_CLICKS_ARROW: number = 16;
 }

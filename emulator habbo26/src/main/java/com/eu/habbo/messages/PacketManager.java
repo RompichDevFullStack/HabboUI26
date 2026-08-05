@@ -393,6 +393,7 @@ public class PacketManager {
         this.registerHandler(Incoming.RoomUserStartTypingEvent, RoomUserStartTypingEvent.class);
         this.registerHandler(Incoming.RoomUserStopTypingEvent, RoomUserStopTypingEvent.class);
         this.registerHandler(Incoming.ToggleFloorItemEvent, ToggleFloorItemEvent.class);
+        this.registerHandler(Incoming.DirectionalArrowClickEvent, DirectionalArrowClickEvent.class);
         this.registerHandler(Incoming.ToggleWallItemEvent, ToggleWallItemEvent.class);
         this.registerHandler(Incoming.RoomBackgroundEvent, RoomBackgroundEvent.class);
         this.registerHandler(Incoming.MannequinSaveNameEvent, MannequinSaveNameEvent.class);

@@ -243,6 +243,7 @@ export class OutgoingHeader
     public static RENAME_CATALOG_PAGE = 9010;
     public static RENAME_CATALOG_ITEM = 9011;
     public static REQUEST_CATALOG_ITEM_NAME = 9012;
+    public static DIRECTIONAL_ARROW_CLICK = 9014;
     public static USER_BOTS = 3848;
     public static USER_CURRENCY = 273;
     public static USER_EFFECT_ACTIVATE = 2959;

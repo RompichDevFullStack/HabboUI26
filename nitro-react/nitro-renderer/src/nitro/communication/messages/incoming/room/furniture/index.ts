@@ -11,6 +11,7 @@ export * from './LoveLockFurniFinishedEvent';
 export * from './LoveLockFurniFriendConfirmedEvent';
 export * from './LoveLockFurniStartEvent';
 export * from './OneWayDoorStatusMessageEvent';
+export * from './OpenDirectionalArrowsEvent';
 export * from './RentableSpaceRentFailedMessageEvent';
 export * from './RentableSpaceRentOkMessageEvent';
 export * from './RentableSpaceStatusMessageEvent';

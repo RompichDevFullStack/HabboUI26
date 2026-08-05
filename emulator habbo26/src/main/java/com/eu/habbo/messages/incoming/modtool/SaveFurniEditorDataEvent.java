@@ -17,11 +17,6 @@ public class SaveFurniEditorDataEvent extends MessageHandler {
 
     @Override
     public void handle() throws Exception {
-        if (this.client.getHabbo().getHabboInfo().getRank().getId() < 7) {
-            this.client.getHabbo().whisper(Emulator.getTexts().getValue("modtool.furnieditor.error.norights"), RoomChatMessageBubbles.ALERT);
-            return;
-        }
-
         int typeId = this.packet.readInt();
         String fullName = this.packet.readString();
         int width = this.packet.readInt();

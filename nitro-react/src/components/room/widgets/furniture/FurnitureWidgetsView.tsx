@@ -5,6 +5,7 @@ import { FurnitureBackgroundColorView } from './FurnitureBackgroundColorView';
 import { FurnitureBadgeDisplayView } from './FurnitureBadgeDisplayView';
 import { FurnitureCraftingView } from './FurnitureCraftingView';
 import { FurnitureDimmerView } from './FurnitureDimmerView';
+import { FurnitureDirectionalArrowsView } from './FurnitureDirectionalArrowsView';
 import { FurnitureExchangeCreditView } from './FurnitureExchangeCreditView';
 import { FurnitureExternalImageView } from './FurnitureExternalImageView';
 import { FurnitureFriendFurniView } from './FurnitureFriendFurniView';
@@ -28,6 +29,7 @@ export const FurnitureWidgetsView: FC<{}> = props =>
             <FurnitureBadgeDisplayView />
             <FurnitureCraftingView />
             <FurnitureDimmerView />
+            <FurnitureDirectionalArrowsView />
             <FurnitureExchangeCreditView />
             <FurnitureExternalImageView />
             <FurnitureFriendFurniView />
