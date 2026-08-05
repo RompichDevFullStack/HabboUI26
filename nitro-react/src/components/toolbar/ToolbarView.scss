@@ -72,14 +72,15 @@
         height: 50px;
         border-radius: 50%;
         background: rgba(20, 20, 20, .85);
-        border: 2px solid #101010;
+        border: 3px solid #6c757d;
         box-shadow: inset 2px 2px rgba(255, 255, 255, .1), inset -2px -2px rgba(255, 255, 255, .1);
-        transition: filter .2s ease-out, transform .15s ease-out;
+        transition: filter .2s ease-out, transform .15s ease-out, border-color .15s ease-out;
         filter: grayscale(1);
 
         &:hover {
             filter: grayscale(0) drop-shadow(2px 2px 0 rgba($black, 0.8));
             transform: scale(1.05);
+            border-color: #adb5bd;
         }
     }
 }
@@ -98,19 +99,21 @@
         height: 50px;
         border-radius: 50%;
         background: rgba(20, 20, 20, .85);
-        border: 2px solid #101010;
+        border: 3px solid #6c757d;
         box-shadow: inset 2px 2px rgba(255, 255, 255, .1), inset -2px -2px rgba(255, 255, 255, .1);
-        transition: filter .2s ease-out, transform .15s ease-out;
+        transition: filter .2s ease-out, transform .15s ease-out, border-color .15s ease-out;
         filter: grayscale(1);
 
         &:hover {
             filter: grayscale(0) drop-shadow(2px 2px 0 rgba($black, 0.8));
             transform: scale(1.05);
+            border-color: #adb5bd;
         }
 
         // Always shown in its active (non-grayscale) state, regardless of hover.
         &.active {
             filter: none;
+            border-color: #adb5bd;
 
             &:hover {
                 filter: drop-shadow(2px 2px 0 rgba($black, 0.8));

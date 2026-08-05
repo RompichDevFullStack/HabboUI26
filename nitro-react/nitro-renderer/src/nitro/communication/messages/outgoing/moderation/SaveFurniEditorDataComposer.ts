@@ -18,6 +18,7 @@ export interface ISaveFurniEditorData
     allowInventoryStack: boolean;
     interactionModesCount: number;
     customParams: string;
+    interactionType: string;
 }
 
 export class SaveFurniEditorDataComposer implements IMessageComposer<any[]>
@@ -42,7 +43,8 @@ export class SaveFurniEditorDataComposer implements IMessageComposer<any[]>
             data.allowGift,
             data.allowInventoryStack,
             data.interactionModesCount,
-            data.customParams
+            data.customParams,
+            data.interactionType
         ];
     }
 

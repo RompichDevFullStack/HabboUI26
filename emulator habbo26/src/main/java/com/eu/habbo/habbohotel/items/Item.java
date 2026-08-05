@@ -295,6 +295,10 @@ public class Item implements ISerialize {
         this.stateCount = (short) stateCount;
     }
 
+    public void setInteractionType(ItemInteraction interactionType) {
+        this.interactionType = interactionType;
+    }
+
     @Override
     public void serialize(ServerMessage message) {
         message.appendString(this.type.code.toLowerCase());

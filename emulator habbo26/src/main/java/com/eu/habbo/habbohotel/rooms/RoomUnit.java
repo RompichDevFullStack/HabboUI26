@@ -16,6 +16,8 @@ import com.eu.habbo.plugin.events.roomunit.RoomUnitLookAtPointEvent;
 import com.eu.habbo.plugin.events.roomunit.RoomUnitSetGoalEvent;
 import com.eu.habbo.plugin.events.users.UserIdleEvent;
 import com.eu.habbo.plugin.events.users.UserTakeStepEvent;
+import com.eu.habbo.habbohotel.wired.WiredHandler;
+import com.eu.habbo.habbohotel.wired.WiredTriggerType;
 import com.eu.habbo.threading.runnables.RoomUnitKick;
 import com.eu.habbo.util.pathfinding.Rotation;
 import gnu.trove.map.TMap;
@@ -614,6 +616,10 @@ public class RoomUnit {
     public void setHandItem(int handItem) {
         this.handItem = handItem;
         this.handItemTimestamp = System.currentTimeMillis();
+
+        if (handItem > 0 && this.room != null) {
+            WiredHandler.handle(WiredTriggerType.AVATAR_RECEIVES_HANDITEM, this, this.room, new Object[]{ handItem });
+        }
     }
 
     public long getHandItemTimestamp() {

@@ -23,6 +23,8 @@ export const FurniEditorView: FC<{}> = props =>
     const [ allowInventoryStack, setAllowInventoryStack ] = useState(false);
     const [ interactionModesCount, setInteractionModesCount ] = useState(1);
     const [ customParams, setCustomParams ] = useState('');
+    const [ interactionType, setInteractionType ] = useState('');
+    const [ interactionTypeOptions, setInteractionTypeOptions ] = useState<string[]>([]);
 
     const onClose = () => setIsVisible(false);
 
@@ -44,7 +46,8 @@ export const FurniEditorView: FC<{}> = props =>
             allowGift,
             allowInventoryStack,
             interactionModesCount,
-            customParams
+            customParams,
+            interactionType
         }));
     }
 
@@ -68,6 +71,8 @@ export const FurniEditorView: FC<{}> = props =>
         setAllowInventoryStack(parser.allowInventoryStack);
         setInteractionModesCount(parser.interactionModesCount);
         setCustomParams(parser.customParams);
+        setInteractionType(parser.interactionType);
+        setInteractionTypeOptions(parser.interactionTypeOptions);
     });
 
     useEffect(() =>
@@ -136,6 +141,12 @@ export const FurniEditorView: FC<{}> = props =>
                 <Column gap={ 1 }>
                     <Text>{ LocalizeText('furni.editor.custom_params') }</Text>
                     <input type="text" className="form-control form-control-sm" value={ customParams } onChange={ event => setCustomParams(event.target.value) } />
+                </Column>
+                <Column gap={ 1 }>
+                    <Text>{ LocalizeText('furni.editor.interaction_type') }</Text>
+                    <select className="form-select form-select-sm" value={ interactionType } onChange={ event => setInteractionType(event.target.value) }>
+                        { interactionTypeOptions.map(option => <option key={ option } value={ option }>{ option }</option>) }
+                    </select>
                 </Column>
                 <Column gap={ 1 }>
                     <Flex alignItems="center" gap={ 1 }>

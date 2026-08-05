@@ -5,6 +5,7 @@ export class WiredTriggerLayout
     public static AVATAR_WALKS_OFF_FURNI: number = 2;
     public static EXECUTE_ONCE: number = 3;
     public static TOGGLE_FURNI: number = 4;
+    public static AVATAR_RECEIVES_HANDITEM: number = 5;
     public static EXECUTE_PERIODICALLY: number = 6;
     public static AVATAR_ENTERS_ROOM: number = 7;
     public static GAME_STARTS: number = 8;

@@ -2,6 +2,7 @@ package com.eu.habbo.messages.incoming.modtool;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.items.Item;
+import com.eu.habbo.habbohotel.items.ItemInteraction;
 import com.eu.habbo.habbohotel.rooms.RoomChatMessageBubbles;
 import com.eu.habbo.messages.incoming.MessageHandler;
 import org.slf4j.Logger;
@@ -37,11 +38,19 @@ public class SaveFurniEditorDataEvent extends MessageHandler {
         boolean allowInventoryStack = this.packet.readBoolean();
         int stateCount = this.packet.readInt();
         String customParams = this.packet.readString();
+        String interactionTypeName = this.packet.readString();
 
         Item item = Emulator.getGameEnvironment().getItemManager().getItem(typeId);
 
         if (item == null) {
             this.client.getHabbo().whisper(Emulator.getTexts().getValue("modtool.furnieditor.error.notfound"), RoomChatMessageBubbles.ALERT);
+            return;
+        }
+
+        ItemInteraction interaction = Emulator.getGameEnvironment().getItemManager().getItemInteraction(interactionTypeName);
+
+        if (!interaction.getName().equalsIgnoreCase(interactionTypeName)) {
+            this.client.getHabbo().whisper(Emulator.getTexts().getValue("modtool.furnieditor.error.invalidinteraction"), RoomChatMessageBubbles.ALERT);
             return;
         }
 
@@ -60,9 +69,10 @@ public class SaveFurniEditorDataEvent extends MessageHandler {
         item.setAllowInventoryStack(allowInventoryStack);
         item.setStateCount(stateCount);
         item.setCustomParams(customParams);
+        item.setInteractionType(interaction);
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection(); PreparedStatement statement = connection.prepareStatement(
-                "UPDATE items_base SET public_name = ?, width = ?, length = ?, stack_height = ?, allow_stack = ?, allow_walk = ?, allow_sit = ?, allow_lay = ?, allow_recycle = ?, allow_trade = ?, allow_marketplace_sell = ?, allow_gift = ?, allow_inventory_stack = ?, interaction_modes_count = ?, customparams = ? WHERE id = ?")) {
+                "UPDATE items_base SET public_name = ?, width = ?, length = ?, stack_height = ?, allow_stack = ?, allow_walk = ?, allow_sit = ?, allow_lay = ?, allow_recycle = ?, allow_trade = ?, allow_marketplace_sell = ?, allow_gift = ?, allow_inventory_stack = ?, interaction_modes_count = ?, customparams = ?, interaction_type = ? WHERE id = ?")) {
             statement.setString(1, fullName);
             statement.setInt(2, width);
             statement.setInt(3, length);
@@ -78,7 +88,8 @@ public class SaveFurniEditorDataEvent extends MessageHandler {
             statement.setBoolean(13, allowInventoryStack);
             statement.setInt(14, stateCount);
             statement.setString(15, customParams);
-            statement.setInt(16, typeId);
+            statement.setString(16, interaction.getName());
+            statement.setInt(17, typeId);
             statement.execute();
         } catch (SQLException e) {
             LOGGER.error("Caught SQL exception", e);

@@ -1,9 +1,15 @@
 package com.eu.habbo.messages.outgoing.modtool;
 
+import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.items.Item;
+import com.eu.habbo.habbohotel.items.ItemInteraction;
 import com.eu.habbo.messages.ServerMessage;
 import com.eu.habbo.messages.outgoing.MessageComposer;
 import com.eu.habbo.messages.outgoing.Outgoing;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FurniEditorDataComposer extends MessageComposer {
     private final Item item;
@@ -31,6 +37,23 @@ public class FurniEditorDataComposer extends MessageComposer {
         this.response.appendBoolean(this.item.allowInventoryStack());
         this.response.appendInt(this.item.getStateCount());
         this.response.appendString(this.item.getCustomParams());
+
+        this.response.appendString(this.item.getInteractionType().getName());
+
+        List<String> interactionNames = new ArrayList<>();
+
+        for (ItemInteraction interaction : Emulator.getGameEnvironment().getItemManager().getInteractionsList()) {
+            interactionNames.add(interaction.getName());
+        }
+
+        Collections.sort(interactionNames);
+
+        this.response.appendInt(interactionNames.size());
+
+        for (String name : interactionNames) {
+            this.response.appendString(name);
+        }
+
         return this.response;
     }
 }

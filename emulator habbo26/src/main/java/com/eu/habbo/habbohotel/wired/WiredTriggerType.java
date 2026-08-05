@@ -6,6 +6,7 @@ public enum WiredTriggerType {
     WALKS_OFF_FURNI(2),
     AT_GIVEN_TIME(3),
     STATE_CHANGED(4),
+    AVATAR_RECEIVES_HANDITEM(5),
     PERIODICALLY(6),
     ENTER_ROOM(7),
     GAME_STARTS(8),
