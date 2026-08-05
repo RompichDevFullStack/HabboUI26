@@ -1,9 +1,13 @@
 import { WiredTriggerLayout } from '../../../../api';
 import { WiredTriggerAvatarClicksArrowView } from './WiredTriggerAvatarClicksArrowView';
+import { WiredTriggerAvatarClicksFurniView } from './WiredTriggerAvatarClicksFurniView';
 import { WiredTriggerAvatarCollisionView } from './WiredTriggerAvatarCollisionView';
 import { WiredTriggerAvatarEnterRoomView } from './WiredTriggerAvatarEnterRoomView';
+import { WiredTriggerAvatarIdleView } from './WiredTriggerAvatarIdleView';
 import { WiredTriggerAvatarReceivesHandItemView } from './WiredTriggerAvatarReceivesHandItemView';
 import { WiredTriggerAvatarSaysSomethingView } from './WiredTriggerAvatarSaysSomethingView';
+import { WiredTriggerAvatarStartsDancingView } from './WiredTriggerAvatarStartsDancingView';
+import { WiredTriggerAvatarStopsDancingView } from './WiredTriggerAvatarStopsDancingView';
 import { WiredTriggerAvatarUsesCommandView } from './WiredTriggerAvatarUsesCommandView';
 import { WiredTriggerAvatarWalksOffFurniView } from './WiredTriggerAvatarWalksOffFurniView';
 import { WiredTriggerAvatarWalksOnFurniView } from './WiredTriggerAvatarWalksOnFurni';
@@ -24,14 +28,22 @@ export const WiredTriggerLayoutView = (code: number) =>
     {
         case WiredTriggerLayout.AVATAR_CLICKS_ARROW:
             return <WiredTriggerAvatarClicksArrowView />;
+        case WiredTriggerLayout.AVATAR_CLICKS_FURNI:
+            return <WiredTriggerAvatarClicksFurniView />;
         case WiredTriggerLayout.AVATAR_COLLISION:
             return <WiredTriggerAvatarCollisionView />;
         case WiredTriggerLayout.AVATAR_ENTERS_ROOM:
             return <WiredTriggerAvatarEnterRoomView />;
+        case WiredTriggerLayout.AVATAR_IDLE:
+            return <WiredTriggerAvatarIdleView />;
         case WiredTriggerLayout.AVATAR_RECEIVES_HANDITEM:
             return <WiredTriggerAvatarReceivesHandItemView />;
         case WiredTriggerLayout.AVATAR_SAYS_SOMETHING:
             return <WiredTriggerAvatarSaysSomethingView />;
+        case WiredTriggerLayout.AVATAR_STARTS_DANCING:
+            return <WiredTriggerAvatarStartsDancingView />;
+        case WiredTriggerLayout.AVATAR_STOPS_DANCING:
+            return <WiredTriggerAvatarStopsDancingView />;
         case WiredTriggerLayout.AVATAR_USES_COMMAND:
             return <WiredTriggerAvatarUsesCommandView />;
         case WiredTriggerLayout.AVATAR_WALKS_OFF_FURNI:

@@ -18,4 +18,8 @@ export class WiredTriggerLayout
     public static AVATAR_COLLISION: number = 15;
     public static AVATAR_CLICKS_ARROW: number = 16;
     public static AVATAR_USES_COMMAND: number = 17;
+    public static AVATAR_IDLE: number = 18;
+    public static AVATAR_CLICKS_FURNI: number = 19;
+    public static AVATAR_STARTS_DANCING: number = 20;
+    public static AVATAR_STOPS_DANCING: number = 21;
 }

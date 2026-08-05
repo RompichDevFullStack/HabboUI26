@@ -198,6 +198,10 @@ public class ItemManager {
         this.interactionsList.add(new ItemInteraction("wf_trg_avatar_collision", WiredTriggerAvatarCollision.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_avatar_clicks_arrow", InteractionDirectionalArrows.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_avatar_uses_command", WiredTriggerAvatarUsesCommand.class));
+        this.interactionsList.add(new ItemInteraction("wf_trg_avatar_idle", WiredTriggerAvatarIdle.class));
+        this.interactionsList.add(new ItemInteraction("wf_trg_avatar_clicks_furni", WiredTriggerAvatarClicksFurni.class));
+        this.interactionsList.add(new ItemInteraction("wf_trg_avatar_starts_dancing", WiredTriggerAvatarStartsDancing.class));
+        this.interactionsList.add(new ItemInteraction("wf_trg_avatar_stops_dancing", WiredTriggerAvatarStopsDancing.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_says_something", WiredTriggerHabboSaysKeyword.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_periodically", WiredTriggerRepeater.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_period_long", WiredTriggerRepeaterLong.class));
@@ -216,6 +220,9 @@ public class ItemManager {
 
         this.interactionsList.add(new ItemInteraction("wf_act_toggle_state", WiredEffectToggleFurni.class));
         this.interactionsList.add(new ItemInteraction("wf_act_reset_timers", WiredEffectResetTimers.class));
+        this.interactionsList.add(new ItemInteraction("wf_act_freeze_unfreeze_user", WiredEffectFreezeUnfreezeUser.class));
+        this.interactionsList.add(new ItemInteraction("wf_act_freeze_user", WiredEffectFreezeUser.class));
+        this.interactionsList.add(new ItemInteraction("wf_act_walk_to_furni", WiredEffectUserWalkToFurni.class));
         this.interactionsList.add(new ItemInteraction("wf_act_match_to_sshot", WiredEffectMatchFurni.class));
         this.interactionsList.add(new ItemInteraction("wf_act_move_rotate", WiredEffectMoveRotateFurni.class));
         this.interactionsList.add(new ItemInteraction("wf_act_give_score", WiredEffectGiveScore.class));

@@ -16,6 +16,7 @@ import com.eu.habbo.plugin.events.roomunit.RoomUnitLookAtPointEvent;
 import com.eu.habbo.plugin.events.roomunit.RoomUnitSetGoalEvent;
 import com.eu.habbo.plugin.events.users.UserIdleEvent;
 import com.eu.habbo.plugin.events.users.UserTakeStepEvent;
+import com.eu.habbo.habbohotel.items.interactions.wired.triggers.WiredTriggerAvatarCollision;
 import com.eu.habbo.habbohotel.wired.WiredHandler;
 import com.eu.habbo.habbohotel.wired.WiredTriggerType;
 import com.eu.habbo.threading.runnables.RoomUnitKick;
@@ -179,8 +180,20 @@ public class RoomUnit {
             boolean overrideChecks = next != null && this.canOverrideTile(next);
 
             if (next != null && next.hasUnits() && !overrideChecks) {
+                THashSet<InteractionWiredTrigger> collisionTriggers = room.getRoomSpecialTypes().getTriggers(WiredTriggerType.AVATAR_COLLISION);
+
                 for (RoomUnit otherUnit : next.getUnits()) {
-                    WiredHandler.handle(WiredTriggerType.AVATAR_COLLISION, this, room, new Object[]{ otherUnit });
+                    if (collisionTriggers != null) {
+                        for (InteractionWiredTrigger trigger : collisionTriggers) {
+                            if (!(trigger instanceof WiredTriggerAvatarCollision)) continue;
+
+                            if (((WiredTriggerAvatarCollision) trigger).triggersOnOrigin()) {
+                                WiredHandler.handle(trigger, this, room, new Object[]{ otherUnit });
+                            } else {
+                                WiredHandler.handle(trigger, otherUnit, room, new Object[]{ this });
+                            }
+                        }
+                    }
                 }
             }
 

@@ -10,6 +10,8 @@ import { WiredActionCallAnotherStackView } from './WiredActionCallAnotherStackVi
 import { WiredActionChaseView } from './WiredActionChaseView';
 import { WiredActionChatView } from './WiredActionChatView';
 import { WiredActionFleeView } from './WiredActionFleeView';
+import { WiredActionFreezeUnfreezeUserView } from './WiredActionFreezeUnfreezeUserView';
+import { WiredActionFreezeUserView } from './WiredActionFreezeUserView';
 import { WiredActionGiveRewardView } from './WiredActionGiveRewardView';
 import { WiredActionGiveScoreToPredefinedTeamView } from './WiredActionGiveScoreToPredefinedTeamView';
 import { WiredActionGiveScoreView } from './WiredActionGiveScoreView';
@@ -24,6 +26,7 @@ import { WiredActionResetView } from './WiredActionResetView';
 import { WiredActionSetFurniStateToView } from './WiredActionSetFurniStateToView';
 import { WiredActionTeleportView } from './WiredActionTeleportView';
 import { WiredActionToggleFurniStateView } from './WiredActionToggleFurniStateView';
+import { WiredActionUserWalkToFurniView } from './WiredActionUserWalkToFurniView';
 
 export const WiredActionLayoutView = (code: number) =>
 {
@@ -51,6 +54,10 @@ export const WiredActionLayoutView = (code: number) =>
             return <WiredActionChatView />;
         case WiredActionLayoutCode.FLEE:
             return <WiredActionFleeView />;
+        case WiredActionLayoutCode.FREEZE_UNFREEZE_USER:
+            return <WiredActionFreezeUnfreezeUserView />;
+        case WiredActionLayoutCode.FREEZE_USER:
+            return <WiredActionFreezeUserView />;
         case WiredActionLayoutCode.GIVE_REWARD:
             return <WiredActionGiveRewardView />;
         case WiredActionLayoutCode.GIVE_SCORE:
@@ -79,6 +86,8 @@ export const WiredActionLayoutView = (code: number) =>
             return <WiredActionTeleportView />;
         case WiredActionLayoutCode.TOGGLE_FURNI_STATE:
             return <WiredActionToggleFurniStateView />;
+        case WiredActionLayoutCode.WALK_TO_FURNI:
+            return <WiredActionUserWalkToFurniView />;
     }
 
     return null;

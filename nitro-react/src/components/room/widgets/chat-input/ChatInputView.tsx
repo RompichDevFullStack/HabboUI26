@@ -224,13 +224,6 @@ export const ChatInputView: FC<{}> = props =>
         }
     }, [ onKeyDownEvent ]);
 
-    useEffect(() =>
-    {
-        if(!inputRef.current) return;
-
-        inputRef.current.parentElement.dataset.value = chatValue;
-    }, [ chatValue ]);
-
     if(!roomSession || roomSession.isSpectator) return null;
 
     return (

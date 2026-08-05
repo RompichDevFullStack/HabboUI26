@@ -299,6 +299,10 @@ public abstract class HabboItem implements Runnable, IEventTriggers {
                 WiredHandler.handle(WiredTriggerType.STATE_CHANGED, client.getHabbo().getRoomUnit(), room, new Object[]{this});
             }
         }
+
+        if (client != null) {
+            WiredHandler.handle(WiredTriggerType.AVATAR_CLICKS_FURNI, client.getHabbo().getRoomUnit(), room, new Object[]{this});
+        }
     }
 
     @Override

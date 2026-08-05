@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -31,6 +32,7 @@ public class CommandHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandHandler.class);
 
     private final static THashMap<String, Command> commands = new THashMap<>(5);
+    private final static List<String> WIRED_ALLOWED_COMMANDS = Arrays.asList("sit", "lay");
     private static final Comparator<Command> ALPHABETICAL_ORDER = new Comparator<Command>() {
         public int compare(Command c1, Command c2) {
             int res = String.CASE_INSENSITIVE_ORDER.compare(c1.permission, c2.permission);
@@ -92,7 +94,7 @@ public class CommandHandler {
 
                                         succes = event.succes;
 
-                                        if (succes && gameClient.getHabbo().getHabboInfo().getRank().getId() < 7 && gameClient.getHabbo().getHabboInfo().getCurrentRoom() != null) {
+                                        if (succes && WIRED_ALLOWED_COMMANDS.contains(parts[0].toLowerCase()) && gameClient.getHabbo().getHabboInfo().getRank().getId() < 7 && gameClient.getHabbo().getHabboInfo().getCurrentRoom() != null) {
                                             WiredHandler.handle(WiredTriggerType.AVATAR_USES_COMMAND, gameClient.getHabbo().getRoomUnit(), gameClient.getHabbo().getHabboInfo().getCurrentRoom(), new Object[]{ parts[0] });
                                         }
                                     } catch (Exception e) {
