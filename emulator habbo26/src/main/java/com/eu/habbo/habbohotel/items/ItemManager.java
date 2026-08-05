@@ -197,6 +197,7 @@ public class ItemManager {
         this.interactionsList.add(new ItemInteraction("wf_trg_avatar_receives_handitem", WiredTriggerAvatarReceivesHandItem.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_avatar_collision", WiredTriggerAvatarCollision.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_avatar_clicks_arrow", InteractionDirectionalArrows.class));
+        this.interactionsList.add(new ItemInteraction("wf_trg_avatar_uses_command", WiredTriggerAvatarUsesCommand.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_says_something", WiredTriggerHabboSaysKeyword.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_periodically", WiredTriggerRepeater.class));
         this.interactionsList.add(new ItemInteraction("wf_trg_period_long", WiredTriggerRepeaterLong.class));

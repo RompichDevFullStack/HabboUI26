@@ -23,7 +23,8 @@ public enum WiredTriggerType {
     STARTS_DANCING(11),
     STOPS_DANCING(11),
     AVATAR_COLLISION(15),
-    AVATAR_CLICKS_ARROW(16);
+    AVATAR_CLICKS_ARROW(16),
+    AVATAR_USES_COMMAND(17);
 
     public final int code;
 

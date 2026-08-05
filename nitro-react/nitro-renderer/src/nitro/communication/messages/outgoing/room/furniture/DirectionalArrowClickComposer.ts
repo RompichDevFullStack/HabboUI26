@@ -4,9 +4,9 @@ export class DirectionalArrowClickComposer implements IMessageComposer<Construct
 {
     private _data: ConstructorParameters<typeof DirectionalArrowClickComposer>;
 
-    constructor(itemId: number, direction: string)
+    constructor(direction: string)
     {
-        this._data = [ itemId, direction ];
+        this._data = [ direction ];
     }
 
     public getMessageArray()

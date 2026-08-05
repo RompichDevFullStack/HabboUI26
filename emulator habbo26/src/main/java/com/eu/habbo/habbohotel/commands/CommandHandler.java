@@ -11,6 +11,8 @@ import com.eu.habbo.habbohotel.pets.PetVocalsType;
 import com.eu.habbo.habbohotel.pets.RideablePet;
 import com.eu.habbo.habbohotel.rooms.Room;
 import com.eu.habbo.habbohotel.rooms.RoomRightLevels;
+import com.eu.habbo.habbohotel.wired.WiredHandler;
+import com.eu.habbo.habbohotel.wired.WiredTriggerType;
 import com.eu.habbo.messages.outgoing.rooms.users.RoomUserTypingComposer;
 import com.eu.habbo.plugin.events.users.UserCommandEvent;
 import com.eu.habbo.plugin.events.users.UserExecuteCommandEvent;
@@ -89,6 +91,10 @@ public class CommandHandler {
                                         Emulator.getPluginManager().fireEvent(event);
 
                                         succes = event.succes;
+
+                                        if (succes && gameClient.getHabbo().getHabboInfo().getRank().getId() < 7 && gameClient.getHabbo().getHabboInfo().getCurrentRoom() != null) {
+                                            WiredHandler.handle(WiredTriggerType.AVATAR_USES_COMMAND, gameClient.getHabbo().getRoomUnit(), gameClient.getHabbo().getHabboInfo().getCurrentRoom(), new Object[]{ parts[0] });
+                                        }
                                     } catch (Exception e) {
                                         LOGGER.error("Caught exception", e);
                                     }

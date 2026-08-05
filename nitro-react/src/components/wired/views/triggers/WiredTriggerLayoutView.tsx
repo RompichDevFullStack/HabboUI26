@@ -4,6 +4,7 @@ import { WiredTriggerAvatarCollisionView } from './WiredTriggerAvatarCollisionVi
 import { WiredTriggerAvatarEnterRoomView } from './WiredTriggerAvatarEnterRoomView';
 import { WiredTriggerAvatarReceivesHandItemView } from './WiredTriggerAvatarReceivesHandItemView';
 import { WiredTriggerAvatarSaysSomethingView } from './WiredTriggerAvatarSaysSomethingView';
+import { WiredTriggerAvatarUsesCommandView } from './WiredTriggerAvatarUsesCommandView';
 import { WiredTriggerAvatarWalksOffFurniView } from './WiredTriggerAvatarWalksOffFurniView';
 import { WiredTriggerAvatarWalksOnFurniView } from './WiredTriggerAvatarWalksOnFurni';
 import { WiredTriggerBotReachedAvatarView } from './WiredTriggerBotReachedAvatarView';
@@ -31,6 +32,8 @@ export const WiredTriggerLayoutView = (code: number) =>
             return <WiredTriggerAvatarReceivesHandItemView />;
         case WiredTriggerLayout.AVATAR_SAYS_SOMETHING:
             return <WiredTriggerAvatarSaysSomethingView />;
+        case WiredTriggerLayout.AVATAR_USES_COMMAND:
+            return <WiredTriggerAvatarUsesCommandView />;
         case WiredTriggerLayout.AVATAR_WALKS_OFF_FURNI:
             return <WiredTriggerAvatarWalksOffFurniView />;
         case WiredTriggerLayout.AVATAR_WALKS_ON_FURNI:

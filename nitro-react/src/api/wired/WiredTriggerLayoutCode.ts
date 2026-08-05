@@ -17,4 +17,5 @@ export class WiredTriggerLayout
     public static BOT_REACHED_AVATAR: number = 14;
     public static AVATAR_COLLISION: number = 15;
     public static AVATAR_CLICKS_ARROW: number = 16;
+    public static AVATAR_USES_COMMAND: number = 17;
 }

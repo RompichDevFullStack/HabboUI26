@@ -12,6 +12,7 @@ import { FriendRequestWidgetView } from './friend-request/FriendRequestWidgetVie
 import { FurnitureWidgetsView } from './furniture/FurnitureWidgetsView';
 import { PetPackageWidgetView } from './pet-package/PetPackageWidgetView';
 import { RoomFilterWordsWidgetView } from './room-filter-words/RoomFilterWordsWidgetView';
+import { RoomKeyboardArrowsView } from './RoomKeyboardArrowsView';
 import { RoomThumbnailWidgetView } from './room-thumbnail/RoomThumbnailWidgetView';
 import { RoomToolsWidgetView } from './room-tools/RoomToolsWidgetView';
 import { WordQuizWidgetView } from './word-quiz/WordQuizWidgetView';
@@ -159,6 +160,7 @@ export const RoomWidgetsView: FC<{}> = props =>
             <ChatInputView />
             <DoorbellWidgetView />
             <FurnitureWidgetsView />
+            <RoomKeyboardArrowsView />
             <RoomToolsWidgetView />
             <RoomFilterWordsWidgetView />
             <RoomThumbnailWidgetView />
